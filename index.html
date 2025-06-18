@@ -3,1895 +3,722 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engichain - Certificazione Documentale via Blockchain</title>
+    <title>Engichain - Certificazione Documentale Blockchain</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" href="favicon.svg">
     <link rel="mask-icon" href="favicon.svg" color="#4F46E5">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        .language-selector {
-            margin-left: 1rem;
-        }
-
-        .language-selector select {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 0.5rem;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .language-selector select:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .language-selector select option {
-            background: #667eea;
-            color: white;
-        }
-
-        .sector-selector {
-            margin-left: 1rem;
-        }
-
-        .sector-selector select {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 0.5rem;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .sector-selector select:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .sector-selector select option {
-            background: #667eea;
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .hero-description {
-            margin-bottom: 3rem;
-        }
-
-        .hero-description p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .hero-features {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
-
-        .hero-features li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #e2e8f0;
-        }
-
-        .hero-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .hero-process {
-            margin: 2rem 0;
-        }
-
-        .hero-process h4 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #ffd700;
-            text-align: center;
-        }
-
-        .process-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .process-card {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .process-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ffd700, #f59e0b);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .card-icon i {
-            font-size: 1.5rem;
-            color: #1a202c;
-        }
-
-        .process-card h5 {
-            color: #ffd700;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .process-card p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #e2e8f0;
-            margin: 0;
-        }
-
-        .hero-highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .highlight-item {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .highlight-item i {
-            font-size: 1.2rem;
-            margin-right: 0.8rem;
-            color: #ffd700;
-            min-width: 20px;
-        }
-
-        .highlight-item span {
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            animation: fadeInUp 1s ease-out 0.4s both;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-            background: #f8fafc;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #2d3748;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-
-        .learn-more {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: #667eea;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover .learn-more {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #2d3748;
-        }
-
-        /* How it Works */
-        .how-it-works {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .step {
-            text-align: center;
-            position: relative;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 1rem;
-        }
-
-        .step h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #2d3748;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 0;
-            background: #f8fafc;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card.featured {
-            transform: scale(1.05);
-            border: 3px solid #667eea;
-        }
-
-        .pricing-card.featured::before {
-            content: 'PIÙ POPOLARE';
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: #ff6b6b;
-            color: white;
-            padding: 5px 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transform: rotate(45deg);
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-
-        .plan-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .plan-price span {
-            font-size: 1rem;
-            color: #718096;
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .plan-features li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .plan-features li i {
-            color: #48bb78;
-        }
-
-        .plan-button {
-            width: 100%;
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .plan-button:hover {
-            background: #5a67d8;
-        }
-
-        /* Setup Costs */
-        .setup-costs {
-            background: white;
-            padding: 60px 0;
-        }
-
-        .setup-table {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-        }
-
-        .setup-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .setup-table th,
-        .setup-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .setup-table th {
-            background: #667eea;
-            color: white;
-            font-weight: 600;
-        }
-
-        .setup-table tr:hover {
-            background: #f7fafc;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .contact-form button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .contact-form button:hover {
-            background: #ff5252;
-        }
-
-        .contact-form button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .success-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .success-content {
-            background: linear-gradient(135deg, #1a202c, #2d3748);
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-            margin: 2rem;
-            border: 2px solid #ffd700;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        .success-content i {
-            font-size: 4rem;
-            color: #10b981;
-            margin-bottom: 1rem;
-        }
-
-        .success-content h3 {
-            color: #ffd700;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .success-content p {
-            color: #e2e8f0;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .close-success-btn {
-            background: linear-gradient(135deg, #ffd700, #f59e0b);
-            color: #1a202c;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close-success-btn:hover {
-            background: linear-gradient(135deg, #e6c200, #d97706);
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: #2d3748;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-ocument        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            /* Mantieni sempre visibili i selettori su mobile */
-            .nav-links .language-selector,
-            .nav-links .sector-selector {
-                display: block !important;
-            }
-            
-            /* Crea una navbar mobile solo per i selettori */
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: 0;
-                background: rgba(79, 70, 229, 0.95);
-                backdrop-filter: blur(10px);
-                padding: 0.5rem;
-                border-radius: 0 0 0 10px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                z-index: 1000;
-                display: flex !important;
-                flex-direction: row;
-                gap: 0.5rem;
-            }
-            
-            .nav-links li:not(.language-selector):not(.sector-selector) {
-                display: none;
-            }
-            
-            .language-selector select,
-            .sector-selector select {
-                font-size: 0.8rem;
-                padding: 0.3rem 0.5rem;
-                min-width: auto;
-                background: rgba(255, 255, 255, 0.9);
-                color: #333;
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 4px;
-                font-weight: 500;
-            }
-            
-            .language-selector select:focus,
-            .sector-selector select:focus {
-                outline: 2px solid rgba(255, 255, 255, 0.8);
-                background: rgba(255, 255, 255, 1);
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-description p {
-                font-size: 1rem;
-            }
-
-            .hero-process h4 {
-                font-size: 1.1rem;
-            }
-
-            .process-cards {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .process-card {
-                padding: 1.5rem;
-            }
-
-            .process-card h5 {
-                font-size: 1rem;
-            }
-
-            .process-card p {
-                font-size: 0.85rem;
-            }
-
-            .hero-highlights {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .highlight-item {
-                padding: 0.8rem;
-            }
-
-            .highlight-item span {
-                font-size: 0.9rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .pricing-card.featured {
-                transform: none;
-            }
-
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .process-cards {
-                gap: 0.8rem;
-            }
-
-            .process-card {
-                padding: 1.2rem;
-            }
-
-            .card-icon {
-                width: 50px;
-                height: 50px;
-            }
-
-            .card-icon i {
-                font-size: 1.2rem;
-            }
-
-            .process-card h5 {
-                font-size: 0.95rem;
-            }
-
-            .process-card p {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 0;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 20px 20px 0 0;
-            text-align: center;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .modal-header .modal-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .modal-section {
-            margin-bottom: 2rem;
-        }
-
-        .modal-section h3 {
-            color: #2d3748;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-section h3 i {
-            color: #667eea;
-        }
-
-        .modal-section p {
-            color: #4a5568;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .modal-section ul {
-            color: #4a5568;
-            padding-left: 1.5rem;
-        }
-
-        .modal-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-
-        .close:hover {
-            opacity: 0.7;
-        }
-
-        .highlight-box {
-            background: #f7fafc;
-            border-left: 4px solid #667eea;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 10px 10px 0;
-        }
-
-        .tech-specs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .tech-spec {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .tech-spec .spec-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #667eea;
-            display: block;
-        }
-
-        .tech-spec .spec-label {
-            font-size: 0.9rem;
-            color: #718096;
-            margin-top: 0.5rem;
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="blockchain-icon">
+                    <div class="block"></div>
+                    <div class="block"></div>
+                    <div class="block"></div>
+                </div>
+            </div>
+            <div class="loading-text">Caricamento Engichain...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <i class="fas fa-link"></i>
-                Engichain
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <div class="blockchain-symbol">
+                            <div class="chain-link"></div>
+                            <div class="chain-link"></div>
+                            <div class="chain-link"></div>
+                        </div>
+                    </div>
+                    <span class="logo-text">Engichain</span>
+                </div>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home" data-translate="nav.home">Home</a></li>
-                <li><a href="#features" data-translate="nav.features">Funzionalità</a></li>
-                <li><a href="#how-it-works" data-translate="nav.howItWorks">Come Funziona</a></li>
-                <li><a href="#pricing" data-translate="nav.pricing">Prezzi</a></li>
-                <li><a href="#contact" data-translate="nav.contact">Contatti</a></li>
-                <li class="sector-selector">
-                    <select id="sectorSelect" onchange="changeSector(this.value)">
-                        <option value="generale" data-translate="sectors.generale">📋 Generale</option>
-                        <option value="nautico" data-translate="sectors.nautico">⚓ Nautico</option>
-                        <option value="automotive" data-translate="sectors.automotive">🚗 Automotive</option>
-                        <option value="sanitario" data-translate="sectors.sanitario">🏥 Sanitario</option>
-                    </select>
-                </li>
-                <li class="language-selector">
-                    <select id="languageSelect" onchange="changeLanguage(this.value)">
-                        <option value="it">🇮🇹 IT</option>
-                        <option value="en">🇬🇧 EN</option>
-                        <option value="de">🇩🇪 DE</option>
-                    </select>
-                </li>
-            </ul>
-        </nav>
-    </header>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active" data-translate="nav.home">Home</a>
+                <a href="#features" class="nav-link" data-translate="nav.features">Funzionalità</a>
+                <a href="#how-it-works" class="nav-link" data-translate="nav.howItWorks">Come Funziona</a>
+                <a href="#pricing" class="nav-link" data-translate="nav.pricing">Prezzi</a>
+                <a href="#contact" class="nav-link" data-translate="nav.contact">Contatti</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="language-selector">
+                    <button class="lang-btn" id="lang-btn">
+                        <span class="flag">🇮🇹</span>
+                        <span class="lang-text">IT</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <button class="lang-option" data-lang="it">
+                            <span class="flag">🇮🇹</span>
+                            <span>Italiano</span>
+                        </button>
+                        <button class="lang-option" data-lang="en">
+                            <span class="flag">🇬🇧</span>
+                            <span>English</span>
+                        </button>
+                        <button class="lang-option" data-lang="de">
+                            <span class="flag">🇩🇪</span>
+                            <span>Deutsch</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="cta-button primary" onclick="scrollToSection('contact')">
+                    <span data-translate="hero.cta">Inizia Ora</span>
+                    <div class="button-glow"></div>
+                </button>
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="floating-elements">
+                <div class="floating-block" style="--delay: 0s; --duration: 8s;"></div>
+                <div class="floating-block" style="--delay: 2s; --duration: 10s;"></div>
+                <div class="floating-block" style="--delay: 4s; --duration: 12s;"></div>
+                <div class="floating-block" style="--delay: 6s; --duration: 9s;"></div>
+            </div>
+        </div>
+        
         <div class="container">
             <div class="hero-content">
-                <h1>Engichain</h1>
-                <p class="hero-subtitle" data-translate="hero.subtitle">Certificazione Documentale via Blockchain per Tutti i Settori</p>
+                <div class="hero-badge">
+                    <span class="badge-icon">🔗</span>
+                    <span>Certificazione Blockchain Avanzata</span>
+                    <div class="badge-glow"></div>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-line">Certificazione</span>
+                    <span class="title-line gradient-text">Documentale</span>
+                    <span class="title-line">via Blockchain</span>
+                </h1>
+                
+                <div class="sector-selector">
+                    <div class="sector-tabs">
+                        <button class="sector-tab active" data-sector="nautico" data-translate="sectors.nautico">⚓ Nautico</button>
+                        <button class="sector-tab" data-sector="sanitario" data-translate="sectors.sanitario">🏥 Sanitario</button>
+                        <button class="sector-tab" data-sector="automotive" data-translate="sectors.automotive">🚗 Automotive</button>
+                        <button class="sector-tab" data-sector="generale" data-translate="sectors.generale">📋 Generale</button>
+                    </div>
+                </div>
+
                 <div class="hero-description">
-                    <p data-translate="hero.description1">Engichain è una piattaforma pensata per offrire una <strong>soluzione completa di certificazione documentale tramite blockchain</strong>, con un'architettura flessibile e scalabile. Per il cliente finale, questo significa poter associare ogni documento (es. verbali tecnici, certificazioni, disegni) a una specifica entità e ad una determinata attività, con la garanzia che il documento sia autenticabile nel tempo.</p>
+                    <h2 class="hero-subtitle" id="hero-subtitle" data-translate="hero.nautico.subtitle">
+                        Certificazione Documentale via Blockchain per il Settore Nautico
+                    </h2>
                     
-                    <p data-translate="hero.description2">Oltre a certificare l'hash del file su blockchain, Engichain struttura tutte le informazioni correlate (nome documento, tipologia, cliente, entità, data, tecnico, ecc.) in un database interrogabile. Questo consente funzionalità avanzate di ricerca e analisi, ad esempio:</p>
+                    <div class="description-content" id="description-content">
+                        <p class="description-text" data-translate="hero.nautico.description1">
+                            Engichain è una piattaforma che offre una <strong>soluzione completa di certificazione documentale blockchain</strong> con architettura flessibile e scalabile...
+                        </p>
+                        
+                        <p class="description-text" data-translate="hero.nautico.description2">
+                            Oltre alla certificazione dell'hash del file su blockchain, Engichain struttura tutte le informazioni associate...
+                        </p>
+                        
+                        <ul class="feature-list">
+                            <li class="feature-item" data-translate="hero.nautico.feature1">
+                                <span class="feature-icon">✓</span>
+                                elencare tutti i documenti di un certo tipo su una specifica imbarcazione;
+                            </li>
+                            <li class="feature-item" data-translate="hero.nautico.feature2">
+                                <span class="feature-icon">✓</span>
+                                filtrare per periodo, tipo di intervento o ente certificatore;
+                            </li>
+                            <li class="feature-item" data-translate="hero.nautico.feature3">
+                                <span class="feature-icon">✓</span>
+                                recuperare la storia completa delle modifiche associate a una singola imbarcazione o cliente.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="cta-button primary large" onclick="scrollToSection('contact')">
+                        <span data-translate="hero.cta">Inizia Ora</span>
+                        <div class="button-ripple"></div>
+                        <div class="button-glow"></div>
+                    </button>
                     
-                    <ul class="hero-features">
-                        <li data-translate="hero.feature1">elencare tutti i documenti di un certo tipo su una specifica entità;</li>
-                        <li data-translate="hero.feature2">filtrare per periodo temporale, tipo di intervento o ente certificatore;</li>
-                        <li data-translate="hero.feature3">recuperare la cronologia completa di modifiche associate a una singola entità o a un cliente.</li>
-                    </ul>
-                    
-                    
-                <a href="#contact" class="cta-button">
-                    <i class="fas fa-rocket"></i>
-                    <span data-translate="hero.cta">Inizia Ora</span>
-                </a>
+                    <button class="cta-button secondary large" onclick="openDemo()">
+                        <span class="demo-icon">▶</span>
+                        <span>Guarda Demo</span>
+                        <div class="button-ripple"></div>
+                    </button>
+                </div>
+
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <div class="trust-icon">🔒</div>
+                        <span>Sicurezza Blockchain</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">⚡</div>
+                        <span>Setup Rapido</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">🌍</div>
+                        <span>Conformità GDPR</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features">
+    <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title" data-translate="features.title">Perché Scegliere Engichain?</h2>
+            <div class="section-header">
+                <h2 class="section-title">Funzionalità Avanzate</h2>
+                <p class="section-subtitle">Scopri le caratteristiche che rendono Engichain la soluzione ideale per la certificazione documentale</p>
+            </div>
+
             <div class="features-grid">
-                <div class="feature-card" onclick="openModal('blockchain')">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon blockchain-icon">
+                        <div class="icon-animation">🔗</div>
                     </div>
                     <h3 data-translate="features.blockchain.title">Sicurezza Blockchain</h3>
-                    <p data-translate="features.blockchain.description">Certificazione immutabile su blockchain pubblica con garanzia di integrità e marca temporale.</p>
-                    <div class="learn-more">
-                        <i class="fas fa-plus"></i> <span data-translate="features.learnMore">Scopri di più</span>
-                    </div>
+                    <p data-translate="features.blockchain.description">Certificazione immutabile su blockchain pubblica con garanzia di integrità e timestamp.</p>
+                    <button class="learn-more-btn" onclick="openModal('blockchain')">
+                        <span>Scopri di più</span>
+                        <span class="arrow">→</span>
+                    </button>
                 </div>
-                <div class="feature-card" onclick="openModal('settore')">
-                    <div class="feature-icon">
-                        <i id="sectorIcon" class="fas fa-ship"></i>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon sector-icon">
+                        <div class="icon-animation" id="sector-icon">⚓</div>
                     </div>
-                    <h3 data-translate="features.settore.title">Settore Nautico</h3>
-                    <p data-translate="features.settore.description">Soluzione specializzata per certificare modifiche tecniche e conformità normative di settore.</p>
-                    <div class="learn-more">
-                        <i class="fas fa-plus"></i> <span data-translate="features.learnMore">Scopri di più</span>
-                    </div>
+                    <h3 id="sector-title" data-translate="features.settore.nautico.title">Settore Nautico</h3>
+                    <p id="sector-description" data-translate="features.settore.nautico.description">Soluzione specializzata per certificare modifiche tecniche su imbarcazioni e conformità normative ISO.</p>
+                    <button class="learn-more-btn" onclick="openModal('settore')">
+                        <span>Scopri di più</span>
+                        <span class="arrow">→</span>
+                    </button>
                 </div>
-                <div class="feature-card" onclick="openModal('cloud')">
-                    <div class="feature-icon">
-                        <i class="fas fa-cloud"></i>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon cloud-icon">
+                        <div class="icon-animation">☁️</div>
                     </div>
-                    <h3 data-translate="features.cloud.title">Cloud Sicuro</h3>
-                    <p data-translate="features.cloud.description">Storage cloud sicuro per documenti con possibilità di utilizzare la propria infrastruttura.</p>
-                    <div class="learn-more">
-                        <i class="fas fa-plus"></i> <span data-translate="features.learnMore">Scopri di più</span>
-                    </div>
+                    <h3 data-translate="features.cloud.title">Cloud Sicuro e Flessibile</h3>
+                    <p data-translate="features.cloud.description">Hosting sicuro con possibilità di utilizzare il cloud del cliente o l'infrastruttura Engichain.</p>
+                    <button class="learn-more-btn" onclick="openModal('cloud')">
+                        <span>Scopri di più</span>
+                        <span class="arrow">→</span>
+                    </button>
                 </div>
-                <div class="feature-card" onclick="openModal('ricerca')">
-                    <div class="feature-icon">
-                        <i class="fas fa-search"></i>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon search-icon">
+                        <div class="icon-animation">🔍</div>
                     </div>
-                    <h3 data-translate="features.ricerca.title">Ricerca Avanzata</h3>
-                    <p data-translate="features.ricerca.description">Database interrogabile per filtrare documenti per entità, periodo, tipo di intervento o ente certificatore.</p>
-                    <div class="learn-more">
-                        <i class="fas fa-plus"></i> <span data-translate="features.learnMore">Scopri di più</span>
-                    </div>
+                    <h3 id="search-title" data-translate="features.ricerca.nautico.title">Ricerca Avanzata</h3>
+                    <p id="search-description" data-translate="features.ricerca.nautico.description">Database interrogabile per filtrare documenti per imbarcazione, periodo, tipo intervento o ente certificatore.</p>
+                    <button class="learn-more-btn" onclick="openModal('ricerca')">
+                        <span>Scopri di più</span>
+                        <span class="arrow">→</span>
+                    </button>
                 </div>
-                <div class="feature-card" onclick="openModal('api')">
-                    <div class="feature-icon">
-                        <i class="fas fa-code"></i>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon api-icon">
+                        <div class="icon-animation">🔌</div>
                     </div>
                     <h3 data-translate="features.api.title">API RESTful</h3>
-                    <p data-translate="features.api.description">Integrazione semplice tramite API o frontend whitelabel personalizzabile con il tuo brand.</p>
-                    <div class="learn-more">
-                        <i class="fas fa-plus"></i> <span data-translate="features.learnMore">Scopri di più</span>
-                    </div>
+                    <p data-translate="features.api.description">Integrazione semplice tramite API REST o frontend whitelabel personalizzabile.</p>
+                    <button class="learn-more-btn" onclick="openModal('api')">
+                        <span>Scopri di più</span>
+                        <span class="arrow">→</span>
+                    </button>
                 </div>
-                <div class="feature-card" onclick="openModal('tracciabilita')">
-                    <div class="feature-icon">
-                        <i class="fas fa-history"></i>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon trace-icon">
+                        <div class="icon-animation">📊</div>
                     </div>
-                    <h3 data-translate="features.tracciabilita.title">Tracciabilità Completa</h3>
-                    <p data-translate="features.tracciabilita.description">Cronologia completa di tutte le modifiche associate a ogni entità o cliente.</p>
-                    <div class="learn-more">
-                        <i class="fas fa-plus"></i> <span data-translate="features.learnMore">Scopri di più</span>
-                    </div>
+                    <h3 id="trace-title" data-translate="features.tracciabilita.nautico.title">Tracciabilità Completa</h3>
+                    <p id="trace-description" data-translate="features.tracciabilita.nautico.description">Storia completa di tutte le modifiche associate a ogni imbarcazione o cliente.</p>
+                    <button class="learn-more-btn" onclick="openModal('tracciabilita')">
+                        <span>Scopri di più</span>
+                        <span class="arrow">→</span>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How it Works -->
-    <section class="how-it-works" id="how-it-works">
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2 class="section-title" data-translate="howItWorks.title">Come Funziona Engichain</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3 data-translate="howItWorks.step1.title">Registrazione Dati</h3>
-                    <p data-translate="howItWorks.step1.description">Ogni entità viene registrata come elemento univoco con metadati strutturati per ogni intervento.</p>
+            <div class="section-header">
+                <h2 class="section-title" data-translate="howItWorks.title">Come Funziona Engichain</h2>
+                <p class="section-subtitle">Un processo semplice e sicuro in 4 passaggi</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="step-number">
+                        <span>1</span>
+                        <div class="step-glow"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 data-translate="howItWorks.step1.title">Registrazione Dati</h3>
+                        <p data-translate="howItWorks.step1.description">Ogni entità viene registrata come entità unica con metadati strutturati per ogni intervento.</p>
+                    </div>
+                    <div class="step-icon">📝</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3 data-translate="howItWorks.step2.title">Upload su Cloud</h3>
-                    <p data-translate="howItWorks.step2.description">I documenti vengono caricati su storage cloud sicuro, utilizzando AWS S3 o la tua infrastruttura.</p>
+
+                <div class="step-connector" data-aos="fade-up" data-aos-delay="200"></div>
+
+                <div class="step-item" data-aos="fade-left" data-aos-delay="300">
+                    <div class="step-number">
+                        <span>2</span>
+                        <div class="step-glow"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 data-translate="howItWorks.step2.title">Upload Cloud</h3>
+                        <p data-translate="howItWorks.step2.description">I documenti vengono caricati in cloud storage sicuro, con AWS S3 o la vostra infrastruttura.</p>
+                    </div>
+                    <div class="step-icon">☁️</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3 data-translate="howItWorks.step3.title">Certificazione Blockchain</h3>
-                    <p data-translate="howItWorks.step3.description">L'hash SHA-256 del file viene registrato su blockchain pubblica con marca temporale immutabile.</p>
+
+                <div class="step-connector" data-aos="fade-up" data-aos-delay="400"></div>
+
+                <div class="step-item" data-aos="fade-right" data-aos-delay="500">
+                    <div class="step-number">
+                        <span>3</span>
+                        <div class="step-glow"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 data-translate="howItWorks.step3.title">Certificazione Blockchain</h3>
+                        <p data-translate="howItWorks.step3.description">L'hash SHA-256 del file viene registrato su blockchain pubblica con timestamp immutabile.</p>
+                    </div>
+                    <div class="step-icon">🔗</div>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3 data-translate="howItWorks.step4.title">Verifica e Integrità</h3>
-                    <p data-translate="howItWorks.step4.description">Verifica futura dell'integrità del documento ricalcolando l'hash e confrontandolo con la blockchain.</p>
+
+                <div class="step-connector" data-aos="fade-up" data-aos-delay="600"></div>
+
+                <div class="step-item" data-aos="fade-left" data-aos-delay="700">
+                    <div class="step-number">
+                        <span>4</span>
+                        <div class="step-glow"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 data-translate="howItWorks.step4.title">Verifica e Integrità</h3>
+                        <p data-translate="howItWorks.step4.description">Verifica futura dell'integrità del documento ricalcolando l'hash e confrontandolo con la blockchain.</p>
+                    </div>
+                    <div class="step-icon">✅</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Setup Costs -->
-    <section class="setup-costs">
+    <!-- Testimonials Section -->
+    <section class="testimonials">
         <div class="container">
-            <h2 class="section-title" data-translate="setupCosts.title">Costi di Setup Iniziale</h2>
-            <div class="setup-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th data-translate="setupCosts.table.service">Servizio</th>
-                            <th data-translate="setupCosts.table.cost">Costo</th>
-                            <th data-translate="setupCosts.table.notes">Note</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-translate="setupCosts.table.apiIntegration">Integrazione API o Frontend</td>
-                            <td>€2.000 - €5.000</td>
-                            <td data-translate="setupCosts.table.apiNotes">In base alla complessità e modalità scelte</td>
-                        </tr>
-                        <tr>
-                            <td data-translate="setupCosts.table.whitelabel">Personalizzazione Whitelabel UI</td>
-                            <td>+€1.000</td>
-                            <td data-translate="setupCosts.table.whitelabelNotes">Solo se richiesta</td>
-                        </tr>
-                        <tr>
-                            <td data-translate="setupCosts.table.cloudConfig">Configurazione Cloud Engichain</td>
-                            <td data-translate="setupCosts.table.cloudCost">Inclusa / +€500</td>
-                            <td data-translate="setupCosts.table.cloudNotes">Inclusa se si usa nostra infrastruttura</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="section-header">
+                <h2 class="section-title">Cosa Dicono i Nostri Clienti</h2>
+                <p class="section-subtitle">Storie di successo da aziende che hanno scelto Engichain</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">"</div>
+                        <p>"Engichain ha rivoluzionato la gestione documentale della nostra flotta. La certificazione blockchain ci garantisce conformità totale alle normative ISO."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop" alt="Marco Rossi">
+                        </div>
+                        <div class="author-info">
+                            <h4>Marco Rossi</h4>
+                            <p>CEO, Marina Italiana</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">"</div>
+                        <p>"La tracciabilità completa dei nostri documenti medici con conformità GDPR è esattamente quello che cercavamo. Implementazione rapida e supporto eccellente."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop" alt="Dr. Laura Bianchi">
+                        </div>
+                        <div class="author-info">
+                            <h4>Dr. Laura Bianchi</h4>
+                            <p>Direttore Sanitario, Ospedale San Marco</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">"</div>
+                        <p>"L'integrazione API è stata semplicissima. Ora tutti i nostri documenti di omologazione sono certificati blockchain con un click."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop" alt="Alessandro Verdi">
+                        </div>
+                        <div class="author-info">
+                            <h4>Alessandro Verdi</h4>
+                            <p>CTO, AutoTech Solutions</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
+    <section id="pricing" class="pricing">
         <div class="container">
-            <h2 class="section-title" data-translate="pricing.title">Piani di Abbonamento Mensile</h2>
+            <div class="section-header">
+                <h2 class="section-title" data-translate="monthlyPlans.title">Piani Mensili</h2>
+                <p class="section-subtitle">Scegli il piano perfetto per le tue esigenze</p>
+            </div>
+
+            <div class="pricing-toggle">
+                <span class="toggle-label">Mensile</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="pricing-toggle">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-label">Annuale <span class="discount-badge">-20%</span></span>
+            </div>
+
             <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-name" data-translate="pricing.starter.name">Starter</div>
-                    <div class="plan-price">€99<span data-translate="pricing.perMonth">/mese</span></div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.starter.feature1">Fino a 500 certificazioni totali</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.starter.feature2">5 GB di storage</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.starter.feature3">Accesso API e dashboard</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.starter.feature4">Hash su blockchain pubblica</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.starter.feature5">+€10/mese ogni 5 GB extra</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.starter.feature6">+€50/mese ogni 500 certificazioni extra</span></li>
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-header">
+                        <h3 data-translate="monthlyPlans.starter.name">Starter</h3>
+                        <div class="price">
+                            <span class="currency">€</span>
+                            <span class="amount" data-monthly="99" data-yearly="79">99</span>
+                            <span class="period" data-translate="monthlyPlans.starter.period">/mese</span>
+                        </div>
+                        <p data-translate="monthlyPlans.starter.description">Perfetto per piccole aziende</p>
+                    </div>
+                    <ul class="features-list">
+                        <li data-translate="monthlyPlans.starter.features.0">100 certificazioni/mese</li>
+                        <li data-translate="monthlyPlans.starter.features.1">1GB storage cloud</li>
+                        <li data-translate="monthlyPlans.starter.features.2">API RESTful</li>
+                        <li data-translate="monthlyPlans.starter.features.3">Supporto email</li>
                     </ul>
-                    <button class="plan-button" data-translate="pricing.starter.button">Scegli Starter</button>
+                    <button class="pricing-cta" onclick="scrollToSection('contact')">
+                        <span data-translate="monthlyPlans.starter.cta">Inizia Gratis</span>
+                        <div class="button-ripple"></div>
+                    </button>
                 </div>
-                
-                <div class="pricing-card featured">
-                    <div class="plan-name" data-translate="pricing.business.name">Business</div>
-                    <div class="plan-price">€249<span data-translate="pricing.perMonth">/mese</span></div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.business.feature1">Fino a 2.000 certificazioni totali</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.business.feature2">15 GB di storage</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.business.feature3">Accesso API e dashboard</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.business.feature4">Hash su blockchain pubblica</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.business.feature5">+€10/mese ogni 7,5 GB extra</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.business.feature6">+€50/mese ogni 1.000 certificazioni extra</span></li>
+
+                <div class="pricing-card popular" data-aos="fade-up" data-aos-delay="200">
+                    <div class="popular-badge" data-translate="monthlyPlans.professional.popular">Più Popolare</div>
+                    <div class="pricing-header">
+                        <h3 data-translate="monthlyPlans.professional.name">Professional</h3>
+                        <div class="price">
+                            <span class="currency">€</span>
+                            <span class="amount" data-monthly="299" data-yearly="239">299</span>
+                            <span class="period" data-translate="monthlyPlans.professional.period">/mese</span>
+                        </div>
+                        <p data-translate="monthlyPlans.professional.description">Ideale per aziende in crescita</p>
+                    </div>
+                    <ul class="features-list">
+                        <li data-translate="monthlyPlans.professional.features.0">500 certificazioni/mese</li>
+                        <li data-translate="monthlyPlans.professional.features.1">10GB storage cloud</li>
+                        <li data-translate="monthlyPlans.professional.features.2">Frontend whitelabel</li>
+                        <li data-translate="monthlyPlans.professional.features.3">Supporto prioritario</li>
+                        <li data-translate="monthlyPlans.professional.features.4">Dashboard analytics</li>
                     </ul>
-                    <button class="plan-button" data-translate="pricing.business.button">Scegli Business</button>
+                    <button class="pricing-cta primary" onclick="scrollToSection('contact')">
+                        <span data-translate="monthlyPlans.professional.cta">Scegli Professional</span>
+                        <div class="button-ripple"></div>
+                        <div class="button-glow"></div>
+                    </button>
                 </div>
-                
-                <div class="pricing-card">
-                    <div class="plan-name" data-translate="pricing.enterprise.name">Enterprise</div>
-                    <div class="plan-price">€499<span data-translate="pricing.perMonth">/mese</span></div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.enterprise.feature1">Fino a 6.000 certificazioni totali</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.enterprise.feature2">30 GB di storage</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.enterprise.feature3">Accesso API e dashboard</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.enterprise.feature4">Hash su blockchain pubblica</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.enterprise.feature5">+€10/mese ogni 10 GB extra</span></li>
-                        <li><i class="fas fa-check"></i> <span data-translate="pricing.enterprise.feature6">+€50/mese ogni 2.000 certificazioni extra</span></li>
+
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-header">
+                        <h3 data-translate="monthlyPlans.enterprise.name">Enterprise</h3>
+                        <div class="price">
+                            <span class="amount" data-translate="monthlyPlans.enterprise.price">Custom</span>
+                        </div>
+                        <p data-translate="monthlyPlans.enterprise.description">Per grandi organizzazioni</p>
+                    </div>
+                    <ul class="features-list">
+                        <li data-translate="monthlyPlans.enterprise.features.0">Certificazioni illimitate</li>
+                        <li data-translate="monthlyPlans.enterprise.features.1">Storage personalizzato</li>
+                        <li data-translate="monthlyPlans.enterprise.features.2">Infrastruttura dedicata</li>
+                        <li data-translate="monthlyPlans.enterprise.features.3">Supporto 24/7</li>
+                        <li data-translate="monthlyPlans.enterprise.features.4">SLA garantito</li>
                     </ul>
-                    <button class="plan-button" data-translate="pricing.enterprise.button">Scegli Enterprise</button>
+                    <button class="pricing-cta" onclick="scrollToSection('contact')">
+                        <span data-translate="monthlyPlans.enterprise.cta">Contattaci</span>
+                        <div class="button-ripple"></div>
+                    </button>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <h3 style="color: #2d3748; margin-bottom: 1rem;" data-translate="pricing.inclusions.title">📦 Inclusioni per tutti i pacchetti:</h3>
-                <p style="color: #718096; margin-bottom: 1rem;" data-translate="pricing.inclusions.list">• Hosting documenti su Engichain<br>
-                • Accesso a dashboard o API<br>
-                • Conservazione hash su blockchain pubblica<br>
-                • Limiti mensili di download per prevenire abusi</p>
-                
-                <div style="background: #f7fafc; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
-                    <h4 style="color: #667eea; margin-bottom: 1rem;" data-translate="pricing.custom.title">Piano "Custom"</h4>
-                    <p style="color: #4a5568;" data-translate="pricing.custom.description">Per esigenze superiori ai piani standard, offriamo soluzioni personalizzate con SLA dedicato. <strong>Contattaci per un preventivo su misura.</strong></p>
+
+            <div class="setup-costs" data-aos="fade-up" data-aos-delay="400">
+                <h3 data-translate="setupCosts.title">Costi di Setup Iniziale</h3>
+                <div class="costs-table">
+                    <div class="table-header">
+                        <span data-translate="setupCosts.table.service">Servizio</span>
+                        <span data-translate="setupCosts.table.cost">Costo</span>
+                        <span data-translate="setupCosts.table.notes">Note</span>
+                    </div>
+                    <div class="table-row">
+                        <span data-translate="setupCosts.table.apiIntegration">Integrazione API o Frontend</span>
+                        <span data-translate="setupCosts.table.apiCost">€2.000 - €5.000</span>
+                        <span data-translate="setupCosts.table.apiNotes">Setup iniziale e personalizzazione</span>
+                    </div>
+                    <div class="table-row">
+                        <span data-translate="setupCosts.table.whitelabelCustomization">Personalizzazione Whitelabel</span>
+                        <span data-translate="setupCosts.table.whitelabelCost">€1.000 - €3.000</span>
+                        <span data-translate="setupCosts.table.whitelabelNotes">Brand, logo e personalizzazioni UI</span>
+                    </div>
+                    <div class="table-row">
+                        <span data-translate="setupCosts.table.training">Formazione e Supporto</span>
+                        <span data-translate="setupCosts.table.trainingCost">€500 - €1.500</span>
+                        <span data-translate="setupCosts.table.trainingNotes">Formazione team e documentazione</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title" style="color: white;" data-translate="contact.title">Inizia il Tuo Progetto</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;" data-translate="contact.subtitle">Contattaci per una consulenza gratuita e scopri come Engichain può trasformare la gestione documentale della tua azienda nautica.</p>
-            
-            <form class="contact-form" onsubmit="handleSubmit(event)">
-                <input type="text" name="nome" data-translate-placeholder="contact.form.name" placeholder="Nome e Cognome" required>
-                <input type="email" name="email" data-translate-placeholder="contact.form.email" placeholder="Email" required>
-                <input type="text" name="azienda" data-translate-placeholder="contact.form.company" placeholder="Azienda">
-                <input type="tel" name="telefono" data-translate-placeholder="contact.form.phone" placeholder="Telefono">
-                <textarea rows="5" name="messaggio" data-translate-placeholder="contact.form.message" placeholder="Descrivi il tuo progetto e le tue esigenze..." required></textarea>
-                <button type="submit" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i>
-                    <span id="submitText" data-translate="contact.form.submit">Invia Richiesta</span>
-                </button>
-            </form>
-            
-            <!-- Success Message -->
-            <div id="successMessage" class="success-message" style="display: none;">
-                <div class="success-content">
-                    <i class="fas fa-check-circle"></i>
-                    <h3 data-translate="contact.success.title">Messaggio Inviato con Successo!</h3>
-                    <p data-translate="contact.success.message">Grazie per il tuo interesse in Engichain. Abbiamo ricevuto la tua richiesta e ti contatteremo entro 24 ore per discutere del tuo progetto.</p>
-                    <button onclick="closeSuccessMessage()" class="close-success-btn" data-translate="contact.success.close">Chiudi</button>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <h2 data-translate="contact.title">Inizia il Tuo Progetto</h2>
+                    <p data-translate="contact.subtitle">Contattaci per una consulenza gratuita e scopri come Engichain può trasformare la gestione documentale della tua azienda.</p>
+                    
+                    <div class="contact-features">
+                        <div class="contact-feature">
+                            <div class="feature-icon">🚀</div>
+                            <div>
+                                <h4>Setup Rapido</h4>
+                                <p>Implementazione in 2-4 settimane</p>
+                            </div>
+                        </div>
+                        <div class="contact-feature">
+                            <div class="feature-icon">💬</div>
+                            <div>
+                                <h4>Consulenza Gratuita</h4>
+                                <p>Analisi delle tue esigenze senza impegno</p>
+                            </div>
+                        </div>
+                        <div class="contact-feature">
+                            <div class="feature-icon">🔧</div>
+                            <div>
+                                <h4>Supporto Completo</h4>
+                                <p>Formazione e assistenza continua</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                <div style="text-align: center;">
-                    <i class="fas fa-envelope" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
-                    <p><a href="mailto:info@enginius.com" style="color: #f1c40f; text-decoration: none;">info@enginius.com</a></p>
-                </div>
-                <div style="text-align: center;">
-                    <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
-                    <p>Genova, Italia</p>
+
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name" data-translate="contact.form.name">Nome Completo</label>
+                            <div class="form-line"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email" data-translate="contact.form.email">Email</label>
+                            <div class="form-line"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="company" name="company">
+                                <label for="company" data-translate="contact.form.company">Azienda</label>
+                                <div class="form-line"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone">
+                                <label for="phone" data-translate="contact.form.phone">Telefono</label>
+                                <div class="form-line"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                            <label for="message" data-translate="contact.form.message">Descrivi il tuo progetto e le tue esigenze...</label>
+                            <div class="form-line"></div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text" data-translate="contact.form.submit">Invia Richiesta</span>
+                            <span class="btn-loading" data-translate="contact.form.sending">Invio in corso...</span>
+                            <div class="button-ripple"></div>
+                            <div class="button-glow"></div>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Feature Modal -->
-    <div id="featureModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div class="modal-icon" id="modalIcon"></div>
-                <h2 id="modalTitle"></h2>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <!-- Content will be dynamically inserted here -->
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p data-translate="footer.copyright">&copy; 2024 Engichain. Tutti i diritti riservati. | Certificazione Documentale via Blockchain</p>
-            <div style="margin-top: 1rem; text-align: center;">
-                <a href="termini-condizioni.html" style="color: #f1c40f; text-decoration: none; margin: 0 1rem;" data-translate="footer.terms">Termini e Condizioni</a>
-                <span style="color: #666;">|</span>
-                <a href="privacy-policy.html" style="color: #f1c40f; text-decoration: none; margin: 0 1rem;" data-translate="footer.privacy">Privacy & Cookie Policy</a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <div class="blockchain-symbol">
+                                <div class="chain-link"></div>
+                                <div class="chain-link"></div>
+                                <div class="chain-link"></div>
+                            </div>
+                        </div>
+                        <span class="logo-text">Engichain</span>
+                    </div>
+                    <p>Certificazione documentale blockchain per il futuro digitale</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Prodotto</h4>
+                        <a href="#features">Funzionalità</a>
+                        <a href="#how-it-works">Come Funziona</a>
+                        <a href="#pricing">Prezzi</a>
+                        <a href="#" onclick="openDemo()">Demo</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Settori</h4>
+                        <a href="#" onclick="changeSector('nautico')">Nautico</a>
+                        <a href="#" onclick="changeSector('sanitario')">Sanitario</a>
+                        <a href="#" onclick="changeSector('automotive')">Automotive</a>
+                        <a href="#" onclick="changeSector('generale')">Generale</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Supporto</h4>
+                        <a href="#contact">Contatti</a>
+                        <a href="mailto:support@engichain.com">Email Support</a>
+                        <a href="#" onclick="openModal('api')">Documentazione API</a>
+                        <a href="#" onclick="openDemo()">Centro Assistenza</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Legale</h4>
+                        <a href="termini-condizioni.html" data-translate="footer.terms">Termini e Condizioni</a>
+                        <a href="privacy-policy.html" data-translate="footer.privacy">Privacy & Cookie Policy</a>
+                        <a href="#" onclick="openModal('blockchain')">Sicurezza</a>
+                        <a href="#" onclick="openModal('cloud')">Conformità</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-translate="footer.copyright">© 2024 Engichain. Tutti i diritti riservati. | Certificazione Documentale Blockchain</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Translation files -->
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-content" id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-container success">
+            <div class="modal-header">
+                <div class="success-icon">✅</div>
+                <h3 data-translate="contact.success.title">Messaggio inviato con successo!</h3>
+                <button class="modal-close" onclick="closeSuccessModal()">×</button>
+            </div>
+            <div class="modal-content">
+                <p data-translate="contact.success.message">Grazie per il tuo interesse in Engichain. Abbiamo ricevuto la tua richiesta e ti contatteremo entro 24 ore per discutere del tuo progetto.</p>
+                <button class="cta-button primary" onclick="closeSuccessModal()" data-translate="contact.success.close">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demo-modal" class="modal-overlay">
+        <div class="modal-container demo">
+            <div class="modal-header">
+                <h3>Demo Engichain</h3>
+                <button class="modal-close" onclick="closeDemoModal()">×</button>
+            </div>
+            <div class="modal-content">
+                <div class="demo-video">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶</div>
+                        <p>Video Demo Interattivo</p>
+                        <small>Scopri come funziona Engichain in 3 minuti</small>
+                    </div>
+                </div>
+                <div class="demo-actions">
+                    <button class="cta-button primary" onclick="scrollToSection('contact'); closeDemoModal();">Richiedi Demo Personalizzata</button>
+                    <button class="cta-button secondary" onclick="closeDemoModal()">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="translations/it.js"></script>
     <script src="translations/en.js"></script>
     <script src="translations/de.js"></script>
-
-    <script>
-        // Loading screen
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hidden');
-            }, 1000);
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Form submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const submitText = document.getElementById('submitText');
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            const sendingText = getNestedTranslation(translations[currentLanguage || 'it'], 'contact.form.sending') || 'Invio in corso...';
-            submitText.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${sendingText}`;
-            
-            // Get form data
-            const formData = new FormData(event.target);
-            const data = {
-                nome: formData.get('nome'),
-                email: formData.get('email'),
-                azienda: formData.get('azienda') || 'Non specificata',
-                telefono: formData.get('telefono') || 'Non specificato',
-                messaggio: formData.get('messaggio')
-            };
-            
-            // Initialize EmailJS (replace 'YOUR_PUBLIC_KEY' with your actual public key)
-            emailjs.init('l6W1Bu1HO5zdOw_bO'); // You need to get this from EmailJS dashboard
-            
-            // Send email using EmailJS
-            emailjs.send('service_npi5w6m', 'template_3lt9x8l', data)
-                .then(() => {
-                    // Show success message
-                    document.getElementById('successMessage').style.display = 'flex';
-                    
-                    // Reset form
-                    event.target.reset();
-                    
-                    // Reset button
-                    submitBtn.disabled = false;
-                    submitText.innerHTML = getNestedTranslation('contact.form.submit');
-                    
-                    console.log(getNestedTranslation('contact.form.success'));
-                })
-                .catch((error) => {
-                    console.error('Errore invio email:', error);
-            const errorText = getNestedTranslation(translations[currentLanguage || 'it'], 'contact.form.error') || 'Errore nell\'invio dell\'email. Riprova più tardi.';
-            alert(errorText);
-                    
-                    // Reset button in case of error
-                    submitBtn.disabled = false;
-                    submitText.innerHTML = getNestedTranslation('contact.form.submit');
-                });
-        }
-        
-        function closeSuccessMessage() {
-            document.getElementById('successMessage').style.display = 'none';
-        }
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.feature-card, .step, .pricing-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(102, 126, 234, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                header.style.backdropFilter = 'none';
-            }
-        });
-
-        // Modal functionality
-        const modalData = {
-            blockchain: {
-                title: 'Sicurezza Blockchain',
-                icon: 'fas fa-shield-alt',
-                sections: [
-                    {
-                         title: 'Tecnologia Immutabile',
-                         icon: 'fas fa-lock',
-                         content: 'Utilizziamo blockchain pubbliche come Ethereum e Algorand per garantire che ogni hash documentale sia permanentemente registrato e non modificabile. Una volta scritto sulla blockchain, nessuno può alterare o cancellare la certificazione.'
-                     },
-                    {
-                         title: 'Marca Temporale Certificata',
-                         icon: 'fas fa-clock',
-                         content: 'L\'hash viene registrato su blockchain pubblica insieme a una marca temporale, garantendo immutabilità e data certa della certificazione.'
-                     },
-                    {
-                         title: 'Verifica Indipendente',
-                         icon: 'fas fa-search-plus',
-                         content: 'In qualunque momento si può dimostrare che un file è identico a quello certificato, ricalcolando l\'hash SHA-256 e confrontandolo con quello registrato sulla blockchain.'
-                     }
-                ],
-                highlight: 'La blockchain garantisce immutabilità e data certa della certificazione, fornendo prova di integrità senza esporre i contenuti del documento.'
-            },
-            settore: {
-                 title: 'Specializzazione Settore',
-                 icon: 'fas fa-building',
-                sections: [
-                    {
-                         title: 'Conformità Normativa',
-                         icon: 'fas fa-certificate',
-                         content: 'Supporto completo per le normative specifiche del settore con certificazioni e conformità alle autorità competenti.'
-                     },
-                    {
-                         title: 'Gestione Entità',
-                         icon: 'fas fa-file-alt',
-                         content: 'Ogni entità è rappresentata come elemento unico nella piattaforma, con metadati strutturati per ogni intervento o modifica.'
-                     },
-                    {
-                         title: 'Documentazione Specializzata',
-                         icon: 'fas fa-handshake',
-                         content: 'Certificazione di documentazione tecnica specializzata per il settore, con tracciabilità completa e prova di integrità.'
-                     }
-                ],
-                highlight: 'Soluzione specializzata che si adatta alle specificità del settore garantendo conformità alle normative di riferimento.'
-            },
-            nautico: {
-                title: 'Specializzazione Settore Nautico',
-                icon: 'fas fa-ship',
-                sections: [
-                    {
-                         title: 'Conformità Normativa',
-                         icon: 'fas fa-certificate',
-                         content: 'Engichain fornisce certificazione e tracciabilità delle modifiche tecniche sulle imbarcazioni ai fini della conformità normativa ISO del settore nautico.'
-                     },
-                    {
-                         title: 'Tipologie di Documenti',
-                         icon: 'fas fa-file-alt',
-                         content: 'Certificazione di modifiche tecniche su imbarcazioni: impianti, strutture, dotazioni, elettronica. Include verbali tecnici, certificazioni, disegni e documentazione specialistica.'
-                     },
-                    {
-                         title: 'Valore per Enti Certificatori',
-                         icon: 'fas fa-handshake',
-                         content: 'La piattaforma offre valore aggiunto per clienti e enti certificatori, fornendo tracciabilità completa e prova di integrità della documentazione tecnica.'
-                     }
-                ],
-                highlight: 'Soluzione specializzata per certificare modifiche tecniche su imbarcazioni con garanzia di autenticabilità nel tempo.'
-            },
-            cloud: {
-                title: 'Cloud Sicuro e Flessibile',
-                icon: 'fas fa-cloud',
-                sections: [
-                    {
-                         title: 'Storage Sicuro',
-                         icon: 'fas fa-server',
-                         content: 'I file vengono caricati su storage cloud sicuro (AWS S3 gestito da Engichain) con hosting documenti incluso nei pacchetti di abbonamento.'
-                     },
-                    {
-                         title: 'Flessibilità Infrastrutturale',
-                         icon: 'fas fa-building',
-                         content: 'Possibilità di usare il cloud del cliente oppure hosting su Engichain. Il cliente può utilizzare il proprio cloud o affidarsi al cloud fornito da Engichain.'
-                     },
-                    {
-                         title: 'Autenticazione',
-                         icon: 'fas fa-users-cog',
-                         content: 'Supporto per Amazon Cognito e JWT per Single Sign-On, con limiti di download mensili per prevenire abusi del sistema.'
-                     }
-                ],
-                highlight: 'Flessibilità di scegliere tra cloud Engichain o la propria infrastruttura, mantenendo tutti i benefici della piattaforma.'
-            },
-            ricerca: {
-                title: 'Ricerca Avanzata e Filtri',
-                icon: 'fas fa-search',
-                sections: [
-                    {
-                         title: 'Filtri Avanzati',
-                         icon: 'fas fa-filter',
-                         content: 'Database interrogabile per filtrare documenti per barca, periodo temporale, tipo di intervento o ente certificatore. Ricerca per tipologia documento, cliente e tecnico responsabile.'
-                     },
-                    {
-                         title: 'Gestione Metadati',
-                         icon: 'fas fa-file-search',
-                         content: 'Strutturazione di tutte le informazioni correlate (nome documento, tipologia, cliente, barca, data, tecnico) in un database interrogabile per funzionalità avanzate.'
-                     },
-                    {
-                         title: 'Cronologia Completa',
-                         icon: 'fas fa-chart-bar',
-                         content: 'Recupero della cronologia completa di modifiche associate a una singola imbarcazione o a un cliente, con consultazione dello storico tramite interfaccia.'
-                     }
-                ],
-                highlight: 'Database strutturato che consente di elencare tutti i documenti di un certo tipo su una specifica barca e analizzare lo storico completo.'
-            },
-            api: {
-                title: 'API RESTful e Integrazione',
-                icon: 'fas fa-code',
-                sections: [
-                    {
-                         title: 'API RESTful',
-                         icon: 'fas fa-plug',
-                         content: 'Endpoints per upload file e metadati, calcolo e registrazione hash su blockchain, lettura certificazioni associate a una barca o cliente, verifica hash.'
-                     },
-                    {
-                         title: 'Frontend Whitelabel',
-                         icon: 'fas fa-palette',
-                         content: 'Interfaccia pronta all\'uso, personalizzabile con brand e logo. Permette upload manuale documenti, inserimento metadati e ricerca storico certificazioni.'
-                     },
-                    {
-                         title: 'Autenticazione Integrata',
-                         icon: 'fas fa-book',
-                         content: 'Supporto per Amazon Cognito e JWT per Single Sign-On. Integrazione semplice e scalabile con possibilità di usare o meno l\'infrastruttura cloud di Engichain.'
-                     }
-                ],
-                highlight: 'Scelta flessibile tra API RESTful per integrazione diretta o frontend whitelabel personalizzabile per uso immediato.'
-            },
-            tracciabilita: {
-                title: 'Tracciabilità Completa',
-                icon: 'fas fa-history',
-                sections: [
-                    {
-                         title: 'Entità Univoche',
-                         icon: 'fas fa-timeline',
-                         content: 'Ogni barca viene rappresentata come entità univoca nella piattaforma. Ogni modifica/intervento è un elemento associato alla barca con metadati strutturati.'
-                     },
-                    {
-                         title: 'Metadati Strutturati',
-                         icon: 'fas fa-clipboard-list',
-                         content: 'Ogni intervento include metadati completi: tipo di intervento, responsabile, documentazione allegata, data, ente certificatore e altre informazioni correlate.'
-                     },
-                    {
-                         title: 'Centralizzazione Documentale',
-                         icon: 'fas fa-bell',
-                         content: 'Centralizzazione e tracciabilità della documentazione tecnica con possibilità di associare ogni documento a una specifica imbarcazione e attività.'
-                     }
-                ],
-                highlight: 'Tracciabilità completa che consente di recuperare la cronologia di tutte le modifiche associate a ogni imbarcazione o cliente.'
-            }
-        };
-
-        function openModal(type) {
-            const data = modalData[type];
-            if (!data) return;
-
-            const modal = document.getElementById('featureModal');
-            const modalIcon = document.getElementById('modalIcon');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
-
-            modalIcon.className = data.icon;
-            
-            // Gestione delle traduzioni per i modal specifici per settore
-            let modalKey = type;
-            if (type === 'nautico' || type === 'settore') {
-                modalKey = `settore.${currentSector || 'nautico'}`;
-            }
-            
-            modalTitle.textContent = getNestedTranslation(translations[currentLanguage || 'it'], `modals.${modalKey}.title`);
-            
-            let bodyHTML = '';
-            
-            data.sections.forEach((section, index) => {
-                bodyHTML += `
-                    <div class="modal-section">
-                        <h3><i class="${section.icon}"></i> ${getNestedTranslation(translations[currentLanguage || 'it'], `modals.${modalKey}.sections.${index}.title`)}</h3>
-                        <p>${getNestedTranslation(translations[currentLanguage || 'it'], `modals.${modalKey}.sections.${index}.content`)}</p>
-                    </div>
-                `;
-            });
-            
-            bodyHTML += `
-                <div class="highlight-box">
-                    <strong>💡 ${getNestedTranslation(translations[currentLanguage || 'it'], 'modals.whyImportant')}:</strong> ${getNestedTranslation(translations[currentLanguage || 'it'], `modals.${modalKey}.highlight`)}
-                </div>
-            `;
-            
-            modalBody.innerHTML = bodyHTML;
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('featureModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('featureModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Plan button interactions
-        document.querySelectorAll('.plan-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const planName = this.parentElement.querySelector('.plan-name').textContent;
-                
-                // Scroll to contact section
-                document.getElementById('contact').scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-                
-                // Pre-fill message with selected plan
-                setTimeout(() => {
-                    const messageField = document.querySelector('textarea[name="messaggio"]');
-                    messageField.value = `Salve, sono interessato al piano ${planName}. Vorrei ricevere maggiori informazioni sui servizi inclusi e sulle modalità di attivazione.\n\nGrazie per l'attenzione.`;
-                    messageField.focus();
-                }, 500); // Small delay to ensure smooth scroll completes
-            });
-        });
-
-        // Add some interactive elements
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-10px) scale(1)';
-            });
-        });
-        
-        // Gestione visibilità prezzi tramite query string
-        function handlePricingVisibility() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const showPricing = urlParams.get('showPricing');
-            
-            if (showPricing !== 'true') {
-                // Nascondi i prezzi e mostra messaggio di contatto
-                const priceElements = document.querySelectorAll('.plan-price');
-                const planButtons = document.querySelectorAll('.plan-button');
-                
-                priceElements.forEach(price => {
-                    price.style.display = 'none';
-                });
-                
-                planButtons.forEach(button => {
-                    button.textContent = 'Contattaci per approfondire';
-                    button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                });
-                
-                // Cambia il titolo della sezione
-                const sectionTitle = document.querySelector('.pricing .section-title');
-                if (sectionTitle) {
-                    sectionTitle.textContent = 'I Nostri Piani';
-                }
-                
-                // Nascondi anche la sezione costi di setup
-                const setupCostsSection = document.querySelector('.setup-costs');
-                if (setupCostsSection) {
-                    setupCostsSection.style.display = 'none';
-                }
-            }
-        }
-        
-        // Sistema di traduzioni
-        const translations = {
-            it: translations_it,
-            en: translations_en,
-            de: translations_de
-        };
-        
-        // Variabili globali per tracciare la lingua e il settore correnti
-        let currentLanguage = 'it';
-        let currentSector = 'generale';
-
-        // Funzione per aggiornare l'URL con i parametri correnti
-        function updateURL() {
-            const url = new URL(window.location);
-            url.searchParams.set('lang', currentLanguage);
-            url.searchParams.set('sector', currentSector);
-            window.history.pushState({}, '', url);
-        }
-        
-        // Funzione per cambiare lingua
-        function changeLanguage(lang) {
-            // Aggiorna la variabile globale
-            currentLanguage = lang;
-            localStorage.setItem('selectedLanguage', lang);
-            document.documentElement.lang = lang;
-            
-            // Aggiorna l'URL
-            updateURL();
-            
-            updateContent();
-        }
-        
-        // Funzione per cambiare settore
-        function changeSector(sector) {
-            currentSector = sector;
-            localStorage.setItem('selectedSector', sector);
-            
-            // Aggiorna l'icona del settore
-            const sectorIcon = document.getElementById('sectorIcon');
-            if (sectorIcon) {
-                const iconMap = {
-                    'nautico': 'fas fa-ship',
-                    'sanitario': 'fas fa-heartbeat',
-                    'automotive': 'fas fa-car',
-                    'generale': 'fas fa-building'
-                };
-                sectorIcon.className = iconMap[sector] || 'fas fa-building';
-            }
-            
-            // Aggiorna l'URL
-            updateURL();
-            
-            updateContent();
-        }
-        
-        // Funzione per aggiornare tutti i contenuti
-        function updateContent() {
-            // Aggiorna tutti gli elementi con data-translate
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                let translation;
-                
-                // Controlla se è una chiave specifica per settore
-                if (key.startsWith('hero.') && !key.includes('cta')) {
-                    const sectorKey = key.replace('hero.', `hero.${currentSector}.`);
-                    translation = getNestedTranslation(translations[currentLanguage], sectorKey);
-                } else if (key.includes('features.settore') || key.includes('features.ricerca') || key.includes('features.tracciabilita')) {
-                    const sectorKey = key.replace('features.settore', `features.settore.${currentSector}`)
-                                        .replace('features.ricerca', `features.ricerca.${currentSector}`)
-                                        .replace('features.tracciabilita', `features.tracciabilita.${currentSector}`);
-                    translation = getNestedTranslation(translations[currentLanguage], sectorKey);
-                } else {
-                    translation = getNestedTranslation(translations[currentLanguage], key);
-                }
-                
-                if (translation) {
-                    element.innerHTML = translation;
-                }
-            });
-            
-            // Aggiorna tutti i placeholder con data-translate-placeholder
-            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
-                const key = element.getAttribute('data-translate-placeholder');
-                const translation = getNestedTranslation(translations[currentLanguage], key);
-                if (translation) {
-                    element.placeholder = translation;
-                }
-            });
-        }
-
-        // Funzione helper per accedere a traduzioni annidate
-        function getNestedTranslation(obj, path) {
-            return path.split('.').reduce((current, key) => current && current[key], obj);
-        }
-
-        // Inizializza la lingua e il settore al caricamento
-        function initializeLanguage() {
-            // Leggi parametri URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlLang = urlParams.get('lang');
-            const urlSector = urlParams.get('sector');
-            
-            // Usa parametri URL se presenti, altrimenti localStorage, altrimenti default
-            const savedLang = urlLang || localStorage.getItem('selectedLanguage') || 'it';
-            const savedSector = urlSector || localStorage.getItem('selectedSector') || 'generale';
-            
-            currentLanguage = savedLang;
-            currentSector = savedSector;
-            document.getElementById('languageSelect').value = savedLang;
-            document.getElementById('sectorSelect').value = savedSector;
-            
-            // Aggiorna l'icona del settore
-            const sectorIcon = document.getElementById('sectorIcon');
-            if (sectorIcon) {
-                const iconMap = {
-                    'nautico': 'fas fa-ship',
-                    'sanitario': 'fas fa-heartbeat',
-                    'automotive': 'fas fa-car',
-                    'generale': 'fas fa-building'
-                };
-                sectorIcon.className = iconMap[savedSector] || 'fas fa-building';
-            }
-            
-            // Aggiorna l'URL per riflettere lo stato corrente
-            updateURL();
-            
-            updateContent();
-        }
-        
-        // Esegui al caricamento della pagina
-        document.addEventListener('DOMContentLoaded', function() {
-            handlePricingVisibility();
-            initializeLanguage();
-            
-            // Aggiungi event listener per il selettore di settore
-            document.getElementById('sectorSelect').addEventListener('change', function() {
-                changeSector(this.value);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
