@@ -1118,6 +1118,70 @@ body {
     background: var(--bg-secondary);
 }
 
+/* Custom Plan Section */
+.custom-plan-info {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-plan-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 600px;
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.custom-plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+}
+
+.custom-plan-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.custom-plan-card p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.custom-features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.custom-features li {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.custom-plan-card .cta-button {
+    margin-top: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.custom-plan-card .cta-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
 .pricing-toggle {
     display: flex;
     align-items: center;
