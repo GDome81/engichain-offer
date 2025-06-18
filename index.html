@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engichain - Certificazione Documentale via Blockchain</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            margin-bottom: 3rem;
+        }
+
+        .hero-description p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .hero-features li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        .hero-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .hero-process {
+            margin: 2rem 0;
+        }
+
+        .hero-process h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+            text-align: center;
+        }
+
+        .process-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .process-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .card-icon i {
+            font-size: 1.5rem;
+            color: #1a202c;
+        }
+
+        .process-card h5 {
+            color: #ffd700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .process-card p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        .hero-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .highlight-item i {
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+            color: #ffd700;
+            min-width: 20px;
+        }
+
+        .highlight-item span {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .learn-more {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .learn-more {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 3px solid #667eea;
+        }
+
+        .pricing-card.featured::before {
+            content: 'PIÙ POPOLARE';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: #718096;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features li i {
+            color: #48bb78;
+        }
+
+        .plan-button {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .plan-button:hover {
+            background: #5a67d8;
+        }
+
+        /* Setup Costs */
+        .setup-costs {
+            background: white;
+            padding: 60px 0;
+        }
+
+        .setup-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .setup-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .setup-table th,
+        .setup-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .setup-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .setup-table tr:hover {
+            background: #f7fafc;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .contact-form button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #ff5252;
+        }
+
+        .contact-form button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-content {
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            margin: 2rem;
+            border: 2px solid #ffd700;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .success-content i {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .success-content h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .success-content p {
+            color: #e2e8f0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .close-success-btn {
+            background: linear-gradient(135deg, #ffd700, #f59e0b);
+            color: #1a202c;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-success-btn:hover {
+            background: linear-gradient(135deg, #e6c200, #d97706);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+ocument        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-description p {
+                font-size: 1rem;
+            }
+
+            .hero-process h4 {
+                font-size: 1.1rem;
+            }
+
+            .process-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .process-card {
+                padding: 1.5rem;
+            }
+
+            .process-card h5 {
+                font-size: 1rem;
+            }
+
+            .process-card p {
+                font-size: 0.85rem;
+            }
+
+            .hero-highlights {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .highlight-item {
+                padding: 0.8rem;
+            }
+
+            .highlight-item span {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process-cards {
+                gap: 0.8rem;
+            }
+
+            .process-card {
+                padding: 1.2rem;
+            }
+
+            .card-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .card-icon i {
+                font-size: 1.2rem;
+            }
+
+            .process-card h5 {
+                font-size: 0.95rem;
+            }
+
+            .process-card p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .modal-header .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section h3 i {
+            color: #667eea;
+        }
+
+        .modal-section p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .modal-section ul {
+            color: #4a5568;
+            padding-left: 1.5rem;
+        }
+
+        .modal-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .highlight-box {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-spec {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .tech-spec .spec-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .tech-spec .spec-label {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-link"></i>
+                Engichain
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Funzionalità</a></li>
+                <li><a href="#how-it-works">Come Funziona</a></li>
+                <li><a href="#pricing">Prezzi</a></li>
+                <li><a href="#contact">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Engichain</h1>
+                <p class="hero-subtitle">Certificazione Documentale via Blockchain per il Settore Nautico</p>
+                <div class="hero-description">
+                    <p>Engichain è una piattaforma pensata per offrire una <strong>soluzione completa di certificazione documentale tramite blockchain</strong>, con un'architettura flessibile e scalabile. Per il cliente finale, questo significa poter associare ogni documento (es. verbali tecnici, certificazioni, disegni) a una specifica imbarcazione e ad una determinata attività, con la garanzia che il documento sia autenticabile nel tempo.</p>
+                    
+                    <p>Oltre a certificare l'hash del file su blockchain, Engichain struttura tutte le informazioni correlate (nome documento, tipologia, cliente, barca, data, tecnico, ecc.) in un database interrogabile. Questo consente funzionalità avanzate di ricerca e analisi, ad esempio:</p>
+                    
+                    <ul class="hero-features">
+                        <li>elencare tutti i documenti di un certo tipo su una specifica barca;</li>
+                        <li>filtrare per periodo temporale, tipo di intervento o ente certificatore;</li>
+                        <li>recuperare la cronologia completa di modifiche associate a una singola imbarcazione o a un cliente.</li>
+                    </ul>
+                    
+                    
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-rocket"></i>
+                    Inizia Ora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Perché Scegliere Engichain?</h2>
+            <div class="features-grid">
+                <div class="feature-card" onclick="openModal('blockchain')">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Sicurezza Blockchain</h3>
+                    <p>Certificazione immutabile su blockchain pubblica con garanzia di integrità e marca temporale.</p>
+                    <div class="learn-more">
+                        <i class="fas fa-plus"></i> Scopri di più
+                    </div>
+                </div>
+                <div class="feature-card" onclick="openModal('nautico')">
+                    <div class="feature-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Settore Nautico</h3>
+                    <p>Soluzione specializzata per certificare modifiche tecniche su imbarcazioni e conformità normativa ISO.</p>
+                    <div class="learn-more">
+                        <i class="fas fa-plus"></i> Scopri di più
+                    </div>
+                </div>
+                <div class="feature-card" onclick="openModal('cloud')">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Sicuro</h3>
+                    <p>Storage cloud sicuro per documenti con possibilità di utilizzare la propria infrastruttura.</p>
+                    <div class="learn-more">
+                        <i class="fas fa-plus"></i> Scopri di più
+                    </div>
+                </div>
+                <div class="feature-card" onclick="openModal('ricerca')">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Ricerca Avanzata</h3>
+                    <p>Database interrogabile per filtrare documenti per barca, periodo, tipo di intervento o ente certificatore.</p>
+                    <div class="learn-more">
+                        <i class="fas fa-plus"></i> Scopri di più
+                    </div>
+                </div>
+                <div class="feature-card" onclick="openModal('api')">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>API RESTful</h3>
+                    <p>Integrazione semplice tramite API o frontend whitelabel personalizzabile con il tuo brand.</p>
+                    <div class="learn-more">
+                        <i class="fas fa-plus"></i> Scopri di più
+                    </div>
+                </div>
+                <div class="feature-card" onclick="openModal('tracciabilita')">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Tracciabilità Completa</h3>
+                    <p>Cronologia completa di tutte le modifiche associate a ogni imbarcazione o cliente.</p>
+                    <div class="learn-more">
+                        <i class="fas fa-plus"></i> Scopri di più
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Come Funziona Engichain</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Registrazione Dati</h3>
+                    <p>Ogni imbarcazione viene registrata come entità univoca con metadati strutturati per ogni intervento.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Upload su Cloud</h3>
+                    <p>I documenti vengono caricati su storage cloud sicuro, utilizzando AWS S3 o la tua infrastruttura.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Certificazione Blockchain</h3>
+                    <p>L'hash SHA-256 del file viene registrato su blockchain pubblica con marca temporale immutabile.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Verifica e Integrità</h3>
+                    <p>Verifica futura dell'integrità del documento ricalcolando l'hash e confrontandolo con la blockchain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Costs -->
+    <section class="setup-costs">
+        <div class="container">
+            <h2 class="section-title">Costi di Setup Iniziale</h2>
+            <div class="setup-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Servizio</th>
+                            <th>Costo</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Integrazione API o Frontend</td>
+                            <td>€2.000 - €5.000</td>
+                            <td>In base alla complessità e modalità scelte</td>
+                        </tr>
+                        <tr>
+                            <td>Personalizzazione Whitelabel UI</td>
+                            <td>+€1.000</td>
+                            <td>Solo se richiesta</td>
+                        </tr>
+                        <tr>
+                            <td>Configurazione Cloud Engichain</td>
+                            <td>Inclusa / +€500</td>
+                            <td>Inclusa se si usa nostra infrastruttura</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Piani di Abbonamento Mensile</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">€99<span>/mese</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Fino a 500 certificazioni totali</li>
+                        <li><i class="fas fa-check"></i> 5 GB di storage</li>
+                        <li><i class="fas fa-check"></i> Accesso API e dashboard</li>
+                        <li><i class="fas fa-check"></i> Hash su blockchain pubblica</li>
+                        <li><i class="fas fa-check"></i> +€10/mese ogni 5 GB extra</li>
+                        <li><i class="fas fa-check"></i> +€50/mese ogni 500 certificazioni extra</li>
+                    </ul>
+                    <button class="plan-button">Scegli Starter</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="plan-name">Business</div>
+                    <div class="plan-price">€249<span>/mese</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Fino a 2.000 certificazioni totali</li>
+                        <li><i class="fas fa-check"></i> 15 GB di storage</li>
+                        <li><i class="fas fa-check"></i> Accesso API e dashboard</li>
+                        <li><i class="fas fa-check"></i> Hash su blockchain pubblica</li>
+                        <li><i class="fas fa-check"></i> +€10/mese ogni 7,5 GB extra</li>
+                        <li><i class="fas fa-check"></i> +€50/mese ogni 1.000 certificazioni extra</li>
+                    </ul>
+                    <button class="plan-button">Scegli Business</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">€499<span>/mese</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Fino a 6.000 certificazioni totali</li>
+                        <li><i class="fas fa-check"></i> 30 GB di storage</li>
+                        <li><i class="fas fa-check"></i> Accesso API e dashboard</li>
+                        <li><i class="fas fa-check"></i> Hash su blockchain pubblica</li>
+                        <li><i class="fas fa-check"></i> +€10/mese ogni 10 GB extra</li>
+                        <li><i class="fas fa-check"></i> +€50/mese ogni 2.000 certificazioni extra</li>
+                    </ul>
+                    <button class="plan-button">Scegli Enterprise</button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <h3 style="color: #2d3748; margin-bottom: 1rem;">📦 Inclusioni per tutti i pacchetti:</h3>
+                <p style="color: #718096; margin-bottom: 1rem;">• Hosting documenti su Engichain<br>
+                • Accesso a dashboard o API<br>
+                • Conservazione hash su blockchain pubblica<br>
+                • Limiti mensili di download per prevenire abusi</p>
+                
+                <div style="background: #f7fafc; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                    <h4 style="color: #667eea; margin-bottom: 1rem;">Piano "Custom"</h4>
+                    <p style="color: #4a5568;">Per esigenze superiori ai piani standard, offriamo soluzioni personalizzate con SLA dedicato. <strong>Contattaci per un preventivo su misura.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Inizia il Tuo Progetto</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Contattaci per una consulenza gratuita e scopri come Engichain può trasformare la gestione documentale della tua azienda nautica.</p>
+            
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <input type="text" name="nome" placeholder="Nome e Cognome" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="azienda" placeholder="Azienda">
+                <input type="tel" name="telefono" placeholder="Telefono">
+                <textarea rows="5" name="messaggio" placeholder="Descrivi il tuo progetto e le tue esigenze..." required></textarea>
+                <button type="submit" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span id="submitText">Invia Richiesta</span>
+                </button>
+            </form>
+            
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <div class="success-content">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Messaggio Inviato con Successo!</h3>
+                    <p>Grazie per il tuo interesse in Engichain. Abbiamo ricevuto la tua richiesta e ti contatteremo entro 24 ore per discutere del tuo progetto.</p>
+                    <button onclick="closeSuccessMessage()" class="close-success-btn">Chiudi</button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <i class="fas fa-envelope" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                    <p><a href="mailto:info@enginius.com" style="color: #f1c40f; text-decoration: none;">info@enginius.com</a></p>
+                </div>
+                <div style="text-align: center;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                    <p>Genova, Italia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Modal -->
+    <div id="featureModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="modal-icon" id="modalIcon"></div>
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Engichain. Tutti i diritti riservati. | Certificazione Documentale via Blockchain</p>
+            <div style="margin-top: 1rem; text-align: center;">
+                <a href="termini-condizioni.html" style="color: #f1c40f; text-decoration: none; margin: 0 1rem;">Termini e Condizioni</a>
+                <span style="color: #666;">|</span>
+                <a href="privacy-policy.html" style="color: #f1c40f; text-decoration: none; margin: 0 1rem;">Privacy & Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Invio in corso...';
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = {
+                nome: formData.get('nome'),
+                email: formData.get('email'),
+                azienda: formData.get('azienda') || 'Non specificata',
+                telefono: formData.get('telefono') || 'Non specificato',
+                messaggio: formData.get('messaggio')
+            };
+            
+            // Initialize EmailJS (replace 'YOUR_PUBLIC_KEY' with your actual public key)
+            emailjs.init('l6W1Bu1HO5zdOw_bO'); // You need to get this from EmailJS dashboard
+            
+            // Send email using EmailJS
+            emailjs.send('service_npi5w6m', 'template_3lt9x8l', data)
+                .then(() => {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'flex';
+                    
+                    // Reset form
+                    event.target.reset();
+                    
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitText.innerHTML = 'Invia Richiesta';
+                    
+                    console.log('Email inviata con successo!');
+                })
+                .catch((error) => {
+                    console.error('Errore invio email:', error);
+                    alert('Errore nell\'invio dell\'email. Riprova più tardi.');
+                    
+                    // Reset button in case of error
+                    submitBtn.disabled = false;
+                    submitText.innerHTML = 'Invia Richiesta';
+                });
+        }
+        
+        function closeSuccessMessage() {
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .step, .pricing-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Modal functionality
+        const modalData = {
+            blockchain: {
+                title: 'Sicurezza Blockchain',
+                icon: 'fas fa-shield-alt',
+                sections: [
+                    {
+                         title: 'Tecnologia Immutabile',
+                         icon: 'fas fa-lock',
+                         content: 'Utilizziamo blockchain pubbliche come Ethereum e Algorand per garantire che ogni hash documentale sia permanentemente registrato e non modificabile. Una volta scritto sulla blockchain, nessuno può alterare o cancellare la certificazione.'
+                     },
+                    {
+                         title: 'Marca Temporale Certificata',
+                         icon: 'fas fa-clock',
+                         content: 'L\'hash viene registrato su blockchain pubblica insieme a una marca temporale, garantendo immutabilità e data certa della certificazione.'
+                     },
+                    {
+                         title: 'Verifica Indipendente',
+                         icon: 'fas fa-search-plus',
+                         content: 'In qualunque momento si può dimostrare che un file è identico a quello certificato, ricalcolando l\'hash SHA-256 e confrontandolo con quello registrato sulla blockchain.'
+                     }
+                ],
+                highlight: 'La blockchain garantisce immutabilità e data certa della certificazione, fornendo prova di integrità senza esporre i contenuti del documento.'
+            },
+            nautico: {
+                title: 'Specializzazione Settore Nautico',
+                icon: 'fas fa-ship',
+                sections: [
+                    {
+                         title: 'Conformità Normativa',
+                         icon: 'fas fa-certificate',
+                         content: 'Engichain fornisce certificazione e tracciabilità delle modifiche tecniche sulle imbarcazioni ai fini della conformità normativa ISO del settore nautico.'
+                     },
+                    {
+                         title: 'Tipologie di Documenti',
+                         icon: 'fas fa-file-alt',
+                         content: 'Certificazione di modifiche tecniche su imbarcazioni: impianti, strutture, dotazioni, elettronica. Include verbali tecnici, certificazioni, disegni e documentazione specialistica.'
+                     },
+                    {
+                         title: 'Valore per Enti Certificatori',
+                         icon: 'fas fa-handshake',
+                         content: 'La piattaforma offre valore aggiunto per clienti e enti certificatori, fornendo tracciabilità completa e prova di integrità della documentazione tecnica.'
+                     }
+                ],
+                highlight: 'Soluzione specializzata per certificare modifiche tecniche su imbarcazioni con garanzia di autenticabilità nel tempo.'
+            },
+            cloud: {
+                title: 'Cloud Sicuro e Flessibile',
+                icon: 'fas fa-cloud',
+                sections: [
+                    {
+                         title: 'Storage Sicuro',
+                         icon: 'fas fa-server',
+                         content: 'I file vengono caricati su storage cloud sicuro (AWS S3 gestito da Engichain) con hosting documenti incluso nei pacchetti di abbonamento.'
+                     },
+                    {
+                         title: 'Flessibilità Infrastrutturale',
+                         icon: 'fas fa-building',
+                         content: 'Possibilità di usare il cloud del cliente oppure hosting su Engichain. Il cliente può utilizzare il proprio cloud o affidarsi al cloud fornito da Engichain.'
+                     },
+                    {
+                         title: 'Autenticazione',
+                         icon: 'fas fa-users-cog',
+                         content: 'Supporto per Amazon Cognito e JWT per Single Sign-On, con limiti di download mensili per prevenire abusi del sistema.'
+                     }
+                ],
+                highlight: 'Flessibilità di scegliere tra cloud Engichain o la propria infrastruttura, mantenendo tutti i benefici della piattaforma.'
+            },
+            ricerca: {
+                title: 'Ricerca Avanzata e Filtri',
+                icon: 'fas fa-search',
+                sections: [
+                    {
+                         title: 'Filtri Avanzati',
+                         icon: 'fas fa-filter',
+                         content: 'Database interrogabile per filtrare documenti per barca, periodo temporale, tipo di intervento o ente certificatore. Ricerca per tipologia documento, cliente e tecnico responsabile.'
+                     },
+                    {
+                         title: 'Gestione Metadati',
+                         icon: 'fas fa-file-search',
+                         content: 'Strutturazione di tutte le informazioni correlate (nome documento, tipologia, cliente, barca, data, tecnico) in un database interrogabile per funzionalità avanzate.'
+                     },
+                    {
+                         title: 'Cronologia Completa',
+                         icon: 'fas fa-chart-bar',
+                         content: 'Recupero della cronologia completa di modifiche associate a una singola imbarcazione o a un cliente, con consultazione dello storico tramite interfaccia.'
+                     }
+                ],
+                highlight: 'Database strutturato che consente di elencare tutti i documenti di un certo tipo su una specifica barca e analizzare lo storico completo.'
+            },
+            api: {
+                title: 'API RESTful e Integrazione',
+                icon: 'fas fa-code',
+                sections: [
+                    {
+                         title: 'API RESTful',
+                         icon: 'fas fa-plug',
+                         content: 'Endpoints per upload file e metadati, calcolo e registrazione hash su blockchain, lettura certificazioni associate a una barca o cliente, verifica hash.'
+                     },
+                    {
+                         title: 'Frontend Whitelabel',
+                         icon: 'fas fa-palette',
+                         content: 'Interfaccia pronta all\'uso, personalizzabile con brand e logo. Permette upload manuale documenti, inserimento metadati e ricerca storico certificazioni.'
+                     },
+                    {
+                         title: 'Autenticazione Integrata',
+                         icon: 'fas fa-book',
+                         content: 'Supporto per Amazon Cognito e JWT per Single Sign-On. Integrazione semplice e scalabile con possibilità di usare o meno l\'infrastruttura cloud di Engichain.'
+                     }
+                ],
+                highlight: 'Scelta flessibile tra API RESTful per integrazione diretta o frontend whitelabel personalizzabile per uso immediato.'
+            },
+            tracciabilita: {
+                title: 'Tracciabilità Completa',
+                icon: 'fas fa-history',
+                sections: [
+                    {
+                         title: 'Entità Univoche',
+                         icon: 'fas fa-timeline',
+                         content: 'Ogni barca viene rappresentata come entità univoca nella piattaforma. Ogni modifica/intervento è un elemento associato alla barca con metadati strutturati.'
+                     },
+                    {
+                         title: 'Metadati Strutturati',
+                         icon: 'fas fa-clipboard-list',
+                         content: 'Ogni intervento include metadati completi: tipo di intervento, responsabile, documentazione allegata, data, ente certificatore e altre informazioni correlate.'
+                     },
+                    {
+                         title: 'Centralizzazione Documentale',
+                         icon: 'fas fa-bell',
+                         content: 'Centralizzazione e tracciabilità della documentazione tecnica con possibilità di associare ogni documento a una specifica imbarcazione e attività.'
+                     }
+                ],
+                highlight: 'Tracciabilità completa che consente di recuperare la cronologia di tutte le modifiche associate a ogni imbarcazione o cliente.'
+            }
+        };
+
+        function openModal(type) {
+            const data = modalData[type];
+            if (!data) return;
+
+            const modal = document.getElementById('featureModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalIcon.className = data.icon;
+            modalTitle.textContent = data.title;
+            
+            let bodyHTML = '';
+            
+            data.sections.forEach(section => {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <h3><i class="${section.icon}"></i> ${section.title}</h3>
+                        <p>${section.content}</p>
+                    </div>
+                `;
+            });
+            
+            bodyHTML += `
+                <div class="highlight-box">
+                    <strong>💡 Perché è importante:</strong> ${data.highlight}
+                </div>
+            `;
+            
+            modalBody.innerHTML = bodyHTML;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('featureModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('featureModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Plan button interactions
+        document.querySelectorAll('.plan-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const planName = this.parentElement.querySelector('.plan-name').textContent;
+                
+                // Scroll to contact section
+                document.getElementById('contact').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+                
+                // Pre-fill message with selected plan
+                setTimeout(() => {
+                    const messageField = document.querySelector('textarea[name="messaggio"]');
+                    messageField.value = `Salve, sono interessato al piano ${planName}. Vorrei ricevere maggiori informazioni sui servizi inclusi e sulle modalità di attivazione.\n\nGrazie per l'attenzione.`;
+                    messageField.focus();
+                }, 500); // Small delay to ensure smooth scroll completes
+            });
+        });
+
+        // Add some interactive elements
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
