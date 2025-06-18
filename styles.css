@@ -1168,6 +1168,16 @@ body {
     align-items: center;
 }
 
+.custom-features li::before {
+    content: '•';
+    color: var(--success-color);
+    font-weight: bold;
+    width: 12px;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+
 .custom-plan-card .cta-button {
     margin-top: 1.5rem;
     background: rgba(255, 255, 255, 0.2);
@@ -1180,6 +1190,71 @@ body {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
+}
+
+/* Pricing Inclusions */
+.pricing-inclusions {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.inclusions-header h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.inclusions-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.inclusion-item {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding: 0.25rem 0;
+}
+
+/* Custom Plan Section */
+.custom-plan-section {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(118, 75, 162, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(118, 75, 162, 0.1);
+}
+
+.custom-plan-header h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.custom-plan-description p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .inclusions-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .inclusion-item {
+        text-align: center;
+    }
 }
 
 .pricing-toggle {
@@ -1349,10 +1424,11 @@ input:checked + .toggle-slider:before {
 }
 
 .features-list li::before {
-    content: '✓';
+    content: '•';
     color: var(--success-color);
     font-weight: bold;
-    width: 20px;
+    width: 12px;
+    font-size: 0.8rem;
     text-align: center;
 }
 
@@ -1470,14 +1546,14 @@ input:checked + .toggle-slider:before {
 }
 
 .contact-feature .feature-icon {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     flex-shrink: 0;
 }
 

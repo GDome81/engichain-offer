@@ -206,15 +206,15 @@ function updateDescriptionContent(sector) {
             <p class="description-text">${sectorData.description2}</p>
             <ul class="feature-list">
                 <li class="feature-item">
-                    <span class="feature-icon">✓</span>
+                    <span >✓</span>
                     ${sectorData.feature1}
                 </li>
                 <li class="feature-item">
-                    <span class="feature-icon">✓</span>
+                    <span >✓</span>
                     ${sectorData.feature2}
                 </li>
                 <li class="feature-item">
-                    <span class="feature-icon">✓</span>
+                    <span >✓</span>
                     ${sectorData.feature3}
                 </li>
             </ul>
@@ -490,7 +490,19 @@ function openModal(type) {
     
     if (!modal || !modalTitle || !modalContent || !translations[currentLanguage]) return;
     
-    const modalData = translations[currentLanguage].modals[type];
+    let modalData;
+    
+    // Handle sector-specific modals
+    if (type === 'settore') {
+        modalData = translations[currentLanguage].modals.settore[currentSector];
+    } else if (type === 'ricerca' && translations[currentLanguage].modals.ricerca[currentSector]) {
+        modalData = translations[currentLanguage].modals.ricerca[currentSector];
+    } else if (type === 'tracciabilita' && translations[currentLanguage].modals.tracciabilita[currentSector]) {
+        modalData = translations[currentLanguage].modals.tracciabilita[currentSector];
+    } else {
+        modalData = translations[currentLanguage].modals[type];
+    }
+    
     if (!modalData) return;
     
     modalTitle.textContent = modalData.title;
