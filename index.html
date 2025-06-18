@@ -93,6 +93,30 @@
             color: white;
         }
 
+        .sector-selector {
+            margin-left: 1rem;
+        }
+
+        .sector-selector select {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sector-selector select:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .sector-selector select option {
+            background: #667eea;
+            color: white;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -974,6 +998,14 @@ ocument        @keyframes fadeIn {
                 <li><a href="#how-it-works" data-translate="nav.howItWorks">Come Funziona</a></li>
                 <li><a href="#pricing" data-translate="nav.pricing">Prezzi</a></li>
                 <li><a href="#contact" data-translate="nav.contact">Contatti</a></li>
+                <li class="sector-selector">
+                    <select id="sectorSelect" onchange="changeSector(this.value)">
+                        <option value="nautico" data-translate="sectors.nautico">⚓ Nautico</option>
+                        <option value="sanitario" data-translate="sectors.sanitario">🏥 Sanitario</option>
+                        <option value="automotive" data-translate="sectors.automotive">🚗 Automotive</option>
+                        <option value="generico" data-translate="sectors.generico">📋 Generico</option>
+                    </select>
+                </li>
                 <li class="language-selector">
                     <select id="languageSelect" onchange="changeLanguage(this.value)">
                         <option value="it">🇮🇹 IT</option>
@@ -1650,13 +1682,45 @@ ocument        @keyframes fadeIn {
                     pricing: 'Prezzi',
                     contact: 'Contatti'
                 },
+                sectors: {
+                    nautico: '⚓ Nautico',
+                    sanitario: '🏥 Sanitario',
+                    automotive: '🚗 Automotive',
+                    generico: '📋 Generico'
+                },
                 hero: {
-                    subtitle: 'Certificazione Documentale via Blockchain per il Settore Nautico',
-                    description1: 'Engichain è una piattaforma pensata per offrire una <strong>soluzione completa di certificazione documentale tramite blockchain</strong>, con un\'architettura flessibile e scalabile. Per il cliente finale, questo significa poter associare ogni documento (es. verbali tecnici, certificazioni, disegni) a una specifica imbarcazione e ad una determinata attività, con la garanzia che il documento sia autenticabile nel tempo.',
-                    description2: 'Oltre a certificare l\'hash del file su blockchain, Engichain struttura tutte le informazioni correlate (nome documento, tipologia, cliente, barca, data, tecnico, ecc.) in un database interrogabile. Questo consente funzionalità avanzate di ricerca e analisi, ad esempio:',
-                    feature1: 'elencare tutti i documenti di un certo tipo su una specifica barca;',
-                    feature2: 'filtrare per periodo temporale, tipo di intervento o ente certificatore;',
-                    feature3: 'recuperare la cronologia completa di modifiche associate a una singola imbarcazione o a un cliente.',
+                    nautico: {
+                        subtitle: 'Certificazione Documentale via Blockchain per il Settore Nautico',
+                        description1: 'Engichain è una piattaforma pensata per offrire una <strong>soluzione completa di certificazione documentale tramite blockchain</strong>, con un\'architettura flessibile e scalabile. Per il cliente finale, questo significa poter associare ogni documento (es. verbali tecnici, certificazioni, disegni) a una specifica imbarcazione e ad una determinata attività, con la garanzia che il documento sia autenticabile nel tempo.',
+                        description2: 'Oltre a certificare l\'hash del file su blockchain, Engichain struttura tutte le informazioni correlate (nome documento, tipologia, cliente, barca, data, tecnico, ecc.) in un database interrogabile. Questo consente funzionalità avanzate di ricerca e analisi, ad esempio:',
+                        feature1: 'elencare tutti i documenti di un certo tipo su una specifica barca;',
+                        feature2: 'filtrare per periodo temporale, tipo di intervento o ente certificatore;',
+                        feature3: 'recuperare la cronologia completa di modifiche associate a una singola imbarcazione o a un cliente.'
+                    },
+                    sanitario: {
+                        subtitle: 'Certificazione Documentale via Blockchain per il Settore Sanitario',
+                        description1: 'Engichain è una piattaforma pensata per offrire una <strong>soluzione completa di certificazione documentale tramite blockchain</strong> per il settore sanitario. Certifica cartelle cliniche, referti medici, certificazioni farmaceutiche e documentazione sanitaria con garanzia di integrità e tracciabilità nel tempo.',
+                        description2: 'La piattaforma struttura tutte le informazioni correlate (tipo documento, paziente, medico, struttura sanitaria, data, ecc.) in un database sicuro e interrogabile. Questo consente funzionalità avanzate per il settore sanitario:',
+                        feature1: 'certificare referti medici e cartelle cliniche con immutabilità garantita;',
+                        feature2: 'tracciare farmaci e dispositivi medici lungo la supply chain;',
+                        feature3: 'garantire conformità normative GDPR e standard sanitari internazionali.'
+                    },
+                    automotive: {
+                        subtitle: 'Certificazione Documentale via Blockchain per il Settore Automotive',
+                        description1: 'Engichain offre una <strong>soluzione blockchain specializzata per l\'industria automotive</strong>, certificando documenti tecnici, certificazioni di qualità, manuali di manutenzione e documentazione di conformità per veicoli e componenti.',
+                        description2: 'La piattaforma organizza informazioni come modello veicolo, numero di telaio, fornitore, data di produzione, tecnico responsabile in un database strutturato. Funzionalità specifiche per l\'automotive:',
+                        feature1: 'certificare documenti di omologazione e conformità normativa;',
+                        feature2: 'tracciare la storia completa di manutenzioni e modifiche per ogni veicolo;',
+                        feature3: 'garantire autenticità di manuali tecnici e procedure di sicurezza.'
+                    },
+                    generico: {
+                        subtitle: 'Certificazione Documentale via Blockchain - Soluzione Universale',
+                        description1: 'Engichain è una <strong>piattaforma blockchain universale</strong> per la certificazione di qualsiasi tipo di documento aziendale. Ideale per contratti, certificazioni, report tecnici, documentazione di qualità e conformità in qualsiasi settore.',
+                        description2: 'La piattaforma adatta la sua struttura dati alle esigenze specifiche del tuo business, organizzando informazioni come cliente, progetto, responsabile, data, tipo documento. Vantaggi universali:',
+                        feature1: 'certificare qualsiasi documento con garanzia di integrità nel tempo;',
+                        feature2: 'organizzare e ricercare documenti per cliente, progetto o tipologia;',
+                        feature3: 'garantire conformità normative e audit trail completi per ogni settore.'
+                    },
                     cta: 'Inizia Ora'
                 },
                 features: {
@@ -1666,25 +1730,67 @@ ocument        @keyframes fadeIn {
                         title: 'Sicurezza Blockchain',
                         description: 'Certificazione immutabile su blockchain pubblica con garanzia di integrità e marca temporale.'
                     },
-                    nautico: {
-                        title: 'Settore Nautico',
-                        description: 'Soluzione specializzata per certificare modifiche tecniche su imbarcazioni e conformità normativa ISO.'
+                    settore: {
+                        nautico: {
+                            title: 'Settore Nautico',
+                            description: 'Soluzione specializzata per certificare modifiche tecniche su imbarcazioni e conformità normativa ISO.'
+                        },
+                        sanitario: {
+                            title: 'Settore Sanitario',
+                            description: 'Certificazione sicura per cartelle cliniche, referti medici e documentazione farmaceutica con conformità GDPR.'
+                        },
+                        automotive: {
+                            title: 'Settore Automotive',
+                            description: 'Tracciabilità completa per documenti tecnici, omologazioni e storia manutenzioni veicoli.'
+                        },
+                        generico: {
+                            title: 'Soluzione Universale',
+                            description: 'Certificazione blockchain per qualsiasi tipo di documento aziendale e conformità normative.'
+                        }
                     },
                     cloud: {
                         title: 'Cloud Sicuro',
                         description: 'Storage cloud sicuro per documenti con possibilità di utilizzare la propria infrastruttura.'
                     },
                     ricerca: {
-                        title: 'Ricerca Avanzata',
-                        description: 'Database interrogabile per filtrare documenti per barca, periodo, tipo di intervento o ente certificatore.'
+                        nautico: {
+                            title: 'Ricerca Avanzata',
+                            description: 'Database interrogabile per filtrare documenti per barca, periodo, tipo di intervento o ente certificatore.'
+                        },
+                        sanitario: {
+                            title: 'Ricerca Sicura',
+                            description: 'Database protetto per ricercare documenti per paziente, medico, struttura sanitaria o tipologia.'
+                        },
+                        automotive: {
+                            title: 'Ricerca Tecnica',
+                            description: 'Sistema di ricerca per veicolo, numero telaio, modello, fornitore o tipo di intervento.'
+                        },
+                        generico: {
+                            title: 'Ricerca Avanzata',
+                            description: 'Database flessibile per filtrare documenti per cliente, progetto, data o tipologia documento.'
+                        }
                     },
                     api: {
                         title: 'API RESTful',
                         description: 'Integrazione semplice tramite API o frontend whitelabel personalizzabile con il tuo brand.'
                     },
                     tracciabilita: {
-                        title: 'Tracciabilità Completa',
-                        description: 'Cronologia completa di tutte le modifiche associate a ogni imbarcazione o cliente.'
+                        nautico: {
+                            title: 'Tracciabilità Completa',
+                            description: 'Cronologia completa di tutte le modifiche associate a ogni imbarcazione o cliente.'
+                        },
+                        sanitario: {
+                            title: 'Tracciabilità Sanitaria',
+                            description: 'Storia completa di documenti medici e farmaceutici con audit trail sicuro e conforme GDPR.'
+                        },
+                        automotive: {
+                            title: 'Tracciabilità Veicoli',
+                            description: 'Cronologia completa di manutenzioni, modifiche e certificazioni per ogni veicolo.'
+                        },
+                        generico: {
+                            title: 'Tracciabilità Universale',
+                            description: 'Storia completa di tutti i documenti associati a clienti, progetti o attività aziendali.'
+                        }
                     }
                 },
                 modals: {
@@ -1910,13 +2016,45 @@ ocument        @keyframes fadeIn {
                     pricing: 'Pricing',
                     contact: 'Contact'
                 },
+                sectors: {
+                    nautico: '⚓ Maritime',
+                    sanitario: '🏥 Healthcare',
+                    automotive: '🚗 Automotive',
+                    generico: '📋 Generic'
+                },
                 hero: {
-                    subtitle: 'Blockchain Document Certification for the Maritime Sector',
-                    description1: 'Engichain is a platform designed to offer a <strong>complete blockchain document certification solution</strong>, with a flexible and scalable architecture. For the end customer, this means being able to associate each document (e.g. technical reports, certifications, drawings) to a specific vessel and a specific activity, with the guarantee that the document is authenticatable over time.',
-                    description2: 'In addition to certifying the file hash on blockchain, Engichain structures all related information (document name, type, customer, boat, date, technician, etc.) in a queryable database. This enables advanced search and analysis features, for example:',
-                    feature1: 'list all documents of a certain type on a specific boat;',
-                    feature2: 'filter by time period, type of intervention or certifying body;',
-                    feature3: 'retrieve the complete history of changes associated with a single vessel or customer.',
+                    nautico: {
+                        subtitle: 'Blockchain Document Certification for the Maritime Sector',
+                        description1: 'Engichain is a platform designed to offer a <strong>complete blockchain document certification solution</strong>, with a flexible and scalable architecture. For the end customer, this means being able to associate each document (e.g. technical reports, certifications, drawings) to a specific vessel and a specific activity, with the guarantee that the document is authenticatable over time.',
+                        description2: 'In addition to certifying the file hash on blockchain, Engichain structures all related information (document name, type, customer, boat, date, technician, etc.) in a queryable database. This enables advanced search and analysis features, for example:',
+                        feature1: 'list all documents of a certain type on a specific boat;',
+                        feature2: 'filter by time period, type of intervention or certifying body;',
+                        feature3: 'retrieve the complete history of changes associated with a single vessel or customer.'
+                    },
+                    sanitario: {
+                        subtitle: 'Blockchain Document Certification for Healthcare Sector',
+                        description1: 'Engichain provides a <strong>complete blockchain certification solution</strong> for the healthcare sector. Certify medical records, medical reports, pharmaceutical certifications and healthcare documentation with guaranteed integrity and traceability over time.',
+                        description2: 'The platform structures all related information (document type, patient, doctor, healthcare facility, date, etc.) in a secure and queryable database. This enables advanced features for healthcare:',
+                        feature1: 'certify medical reports and clinical records with guaranteed immutability;',
+                        feature2: 'track drugs and medical devices along the supply chain;',
+                        feature3: 'ensure GDPR compliance and international healthcare standards.'
+                    },
+                    automotive: {
+                        subtitle: 'Blockchain Document Certification for Automotive Industry',
+                        description1: 'Engichain offers a <strong>specialized blockchain solution for the automotive industry</strong>, certifying technical documents, quality certifications, maintenance manuals and compliance documentation for vehicles and components.',
+                        description2: 'The platform organizes information such as vehicle model, chassis number, supplier, production date, responsible technician in a structured database. Specific features for automotive:',
+                        feature1: 'certify homologation documents and regulatory compliance;',
+                        feature2: 'track complete history of maintenance and modifications for each vehicle;',
+                        feature3: 'guarantee authenticity of technical manuals and safety procedures.'
+                    },
+                    generico: {
+                        subtitle: 'Blockchain Document Certification - Universal Solution',
+                        description1: 'Engichain is a <strong>universal blockchain platform</strong> for certifying any type of business document. Ideal for contracts, certifications, technical reports, quality documentation and compliance in any sector.',
+                        description2: 'The platform adapts its data structure to your specific business needs, organizing information such as customer, project, manager, date, document type. Universal benefits:',
+                        feature1: 'certify any document with guaranteed integrity over time;',
+                        feature2: 'organize and search documents by customer, project or type;',
+                        feature3: 'ensure regulatory compliance and complete audit trails for any sector.'
+                    },
                     cta: 'Get Started'
                 },
                 features: {
@@ -1926,25 +2064,67 @@ ocument        @keyframes fadeIn {
                         title: 'Blockchain Security',
                         description: 'Immutable certification on public blockchain with integrity guarantee and timestamp.'
                     },
-                    nautico: {
-                        title: 'Maritime Sector',
-                        description: 'Specialized solution for certifying technical modifications on vessels and ISO regulatory compliance.'
+                    settore: {
+                        nautico: {
+                            title: 'Maritime Sector',
+                            description: 'Specialized solution for certifying technical modifications on vessels and ISO regulatory compliance.'
+                        },
+                        sanitario: {
+                            title: 'Healthcare Sector',
+                            description: 'Secure certification for medical records, medical reports and pharmaceutical documentation with GDPR compliance.'
+                        },
+                        automotive: {
+                            title: 'Automotive Sector',
+                            description: 'Complete traceability for technical documents, homologations and vehicle maintenance history.'
+                        },
+                        generico: {
+                            title: 'Universal Solution',
+                            description: 'Blockchain certification for any type of business document and regulatory compliance.'
+                        }
                     },
                     cloud: {
                         title: 'Secure Cloud',
                         description: 'Secure cloud storage for documents with the possibility to use your own infrastructure.'
                     },
                     ricerca: {
-                        title: 'Advanced Search',
-                        description: 'Queryable database to filter documents by boat, period, type of intervention or certifying body.'
+                        nautico: {
+                            title: 'Advanced Search',
+                            description: 'Queryable database to filter documents by boat, period, type of intervention or certifying body.'
+                        },
+                        sanitario: {
+                            title: 'Secure Search',
+                            description: 'Protected database to search documents by patient, doctor, healthcare facility or type.'
+                        },
+                        automotive: {
+                            title: 'Technical Search',
+                            description: 'Search system by vehicle, chassis number, model, supplier or type of intervention.'
+                        },
+                        generico: {
+                            title: 'Advanced Search',
+                            description: 'Flexible database to filter documents by customer, project, date or document type.'
+                        }
                     },
                     api: {
                         title: 'RESTful API',
                         description: 'Simple integration via API or customizable whitelabel frontend with your brand.'
                     },
                     tracciabilita: {
-                        title: 'Complete Traceability',
-                        description: 'Complete history of all changes associated with each vessel or customer.'
+                        nautico: {
+                            title: 'Complete Traceability',
+                            description: 'Complete history of all changes associated with each vessel or customer.'
+                        },
+                        sanitario: {
+                            title: 'Healthcare Traceability',
+                            description: 'Complete history of medical and pharmaceutical documents with secure and GDPR-compliant audit trail.'
+                        },
+                        automotive: {
+                            title: 'Vehicle Traceability',
+                            description: 'Complete history of maintenance, modifications and certifications for each vehicle.'
+                        },
+                        generico: {
+                            title: 'Universal Traceability',
+                            description: 'Complete history of all documents associated with customers, projects or business activities.'
+                        }
                     }
                 },
                 modals: {
@@ -2170,13 +2350,45 @@ ocument        @keyframes fadeIn {
                     pricing: 'Preise',
                     contact: 'Kontakt'
                 },
+                sectors: {
+                    nautico: '⚓ Schifffahrt',
+                    sanitario: '🏥 Gesundheitswesen',
+                    automotive: '🚗 Automotive',
+                    generico: '📋 Allgemein'
+                },
                 hero: {
-                    subtitle: 'Blockchain-Dokumentenzertifizierung für den Schifffahrtssektor',
-                    description1: 'Engichain ist eine Plattform, die eine <strong>vollständige Blockchain-Dokumentenzertifizierungslösung</strong> mit einer flexiblen und skalierbaren Architektur bietet. Für den Endkunden bedeutet dies, jedes Dokument (z.B. technische Berichte, Zertifizierungen, Zeichnungen) einem bestimmten Schiff und einer bestimmten Aktivität zuordnen zu können, mit der Garantie, dass das Dokument über die Zeit authentifizierbar ist.',
-                    description2: 'Zusätzlich zur Zertifizierung des Datei-Hashs auf der Blockchain strukturiert Engichain alle zugehörigen Informationen (Dokumentname, Typ, Kunde, Boot, Datum, Techniker, etc.) in einer abfragbaren Datenbank. Dies ermöglicht erweiterte Such- und Analysefunktionen, zum Beispiel:',
-                    feature1: 'alle Dokumente eines bestimmten Typs auf einem bestimmten Boot auflisten;',
-                    feature2: 'nach Zeitraum, Art der Intervention oder Zertifizierungsstelle filtern;',
-                    feature3: 'die vollständige Historie der Änderungen abrufen, die mit einem einzelnen Schiff oder Kunden verbunden sind.',
+                    nautico: {
+                        subtitle: 'Blockchain-Dokumentenzertifizierung für den Schifffahrtssektor',
+                        description1: 'Engichain ist eine Plattform, die eine <strong>vollständige Blockchain-Dokumentenzertifizierungslösung</strong> mit einer flexiblen und skalierbaren Architektur bietet. Für den Endkunden bedeutet dies, jedes Dokument (z.B. technische Berichte, Zertifizierungen, Zeichnungen) einem bestimmten Schiff und einer bestimmten Aktivität zuordnen zu können, mit der Garantie, dass das Dokument über die Zeit authentifizierbar ist.',
+                        description2: 'Zusätzlich zur Zertifizierung des Datei-Hashs auf der Blockchain strukturiert Engichain alle zugehörigen Informationen (Dokumentname, Typ, Kunde, Boot, Datum, Techniker, etc.) in einer abfragbaren Datenbank. Dies ermöglicht erweiterte Such- und Analysefunktionen, zum Beispiel:',
+                        feature1: 'alle Dokumente eines bestimmten Typs auf einem bestimmten Boot auflisten;',
+                        feature2: 'nach Zeitraum, Art der Intervention oder Zertifizierungsstelle filtern;',
+                        feature3: 'die vollständige Historie der Änderungen abrufen, die mit einem einzelnen Schiff oder Kunden verbunden sind.'
+                    },
+                    sanitario: {
+                        subtitle: 'Blockchain-Dokumentenzertifizierung für das Gesundheitswesen',
+                        description1: 'Engichain bietet eine <strong>vollständige Blockchain-Zertifizierungslösung</strong> für das Gesundheitswesen. Zertifizieren Sie Krankenakten, Arztberichte, pharmazeutische Zertifizierungen und Gesundheitsdokumentation mit garantierter Integrität und Rückverfolgbarkeit über die Zeit.',
+                        description2: 'Die Plattform strukturiert alle zugehörigen Informationen (Dokumenttyp, Patient, Arzt, Gesundheitseinrichtung, Datum, etc.) in einer sicheren und abfragbaren Datenbank. Dies ermöglicht erweiterte Funktionen für das Gesundheitswesen:',
+                        feature1: 'Zertifizierung von Arztberichten und Krankenakten mit garantierter Unveränderlichkeit;',
+                        feature2: 'Verfolgung von Medikamenten und Medizinprodukten entlang der Lieferkette;',
+                        feature3: 'Gewährleistung der DSGVO-Konformität und internationaler Gesundheitsstandards.'
+                    },
+                    automotive: {
+                        subtitle: 'Blockchain-Dokumentenzertifizierung für die Automobilindustrie',
+                        description1: 'Engichain bietet eine <strong>spezialisierte Blockchain-Lösung für die Automobilindustrie</strong>, die technische Dokumente, Qualitätszertifizierungen, Wartungshandbücher und Konformitätsdokumentation für Fahrzeuge und Komponenten zertifiziert.',
+                        description2: 'Die Plattform organisiert Informationen wie Fahrzeugmodell, Fahrgestellnummer, Lieferant, Produktionsdatum, verantwortlicher Techniker in einer strukturierten Datenbank. Spezifische Funktionen für die Automobilindustrie:',
+                        feature1: 'Zertifizierung von Homologationsdokumenten und regulatorischer Konformität;',
+                        feature2: 'Verfolgung der vollständigen Historie von Wartungen und Änderungen für jedes Fahrzeug;',
+                        feature3: 'Garantie der Authentizität von technischen Handbüchern und Sicherheitsverfahren.'
+                    },
+                    generico: {
+                        subtitle: 'Blockchain-Dokumentenzertifizierung - Universelle Lösung',
+                        description1: 'Engichain ist eine <strong>universelle Blockchain-Plattform</strong> für die Zertifizierung jeder Art von Geschäftsdokument. Ideal für Verträge, Zertifizierungen, technische Berichte, Qualitätsdokumentation und Konformität in jedem Sektor.',
+                        description2: 'Die Plattform passt ihre Datenstruktur an Ihre spezifischen Geschäftsanforderungen an und organisiert Informationen wie Kunde, Projekt, Manager, Datum, Dokumenttyp. Universelle Vorteile:',
+                        feature1: 'Zertifizierung jedes Dokuments mit garantierter Integrität über die Zeit;',
+                        feature2: 'Organisation und Suche von Dokumenten nach Kunde, Projekt oder Typ;',
+                        feature3: 'Gewährleistung regulatorischer Konformität und vollständiger Audit-Trails für jeden Sektor.'
+                    },
                     cta: 'Jetzt starten'
                 },
                 features: {
@@ -2186,25 +2398,67 @@ ocument        @keyframes fadeIn {
                         title: 'Blockchain-Sicherheit',
                         description: 'Unveränderliche Zertifizierung auf öffentlicher Blockchain mit Integritätsgarantie und Zeitstempel.'
                     },
-                    nautico: {
-                        title: 'Schifffahrtssektor',
-                        description: 'Spezialisierte Lösung für die Zertifizierung technischer Änderungen an Schiffen und ISO-Regelkonformität.'
+                    settore: {
+                        nautico: {
+                            title: 'Schifffahrtssektor',
+                            description: 'Spezialisierte Lösung für die Zertifizierung technischer Änderungen an Schiffen und ISO-Regelkonformität.'
+                        },
+                        sanitario: {
+                            title: 'Gesundheitssektor',
+                            description: 'Sichere Zertifizierung für Krankenakten, Arztberichte und pharmazeutische Dokumentation mit DSGVO-Konformität.'
+                        },
+                        automotive: {
+                            title: 'Automobilsektor',
+                            description: 'Vollständige Rückverfolgbarkeit für technische Dokumente, Homologationen und Fahrzeugwartungshistorie.'
+                        },
+                        generico: {
+                            title: 'Universelle Lösung',
+                            description: 'Blockchain-Zertifizierung für jede Art von Geschäftsdokument und regulatorische Konformität.'
+                        }
                     },
                     cloud: {
                         title: 'Sichere Cloud',
                         description: 'Sicherer Cloud-Speicher für Dokumente mit der Möglichkeit, Ihre eigene Infrastruktur zu nutzen.'
                     },
                     ricerca: {
-                        title: 'Erweiterte Suche',
-                        description: 'Abfragbare Datenbank zum Filtern von Dokumenten nach Boot, Zeitraum, Art der Intervention oder Zertifizierungsstelle.'
+                        nautico: {
+                            title: 'Erweiterte Suche',
+                            description: 'Abfragbare Datenbank zum Filtern von Dokumenten nach Boot, Zeitraum, Art der Intervention oder Zertifizierungsstelle.'
+                        },
+                        sanitario: {
+                            title: 'Sichere Suche',
+                            description: 'Geschützte Datenbank zur Suche von Dokumenten nach Patient, Arzt, Gesundheitseinrichtung oder Typ.'
+                        },
+                        automotive: {
+                            title: 'Technische Suche',
+                            description: 'Suchsystem nach Fahrzeug, Fahrgestellnummer, Modell, Lieferant oder Art der Intervention.'
+                        },
+                        generico: {
+                            title: 'Erweiterte Suche',
+                            description: 'Flexible Datenbank zum Filtern von Dokumenten nach Kunde, Projekt, Datum oder Dokumenttyp.'
+                        }
                     },
                     api: {
                         title: 'RESTful API',
                         description: 'Einfache Integration über API oder anpassbares Whitelabel-Frontend mit Ihrer Marke.'
                     },
                     tracciabilita: {
-                        title: 'Vollständige Rückverfolgbarkeit',
-                        description: 'Vollständige Historie aller Änderungen, die mit jedem Schiff oder Kunden verbunden sind.'
+                        nautico: {
+                            title: 'Vollständige Rückverfolgbarkeit',
+                            description: 'Vollständige Historie aller Änderungen, die mit jedem Schiff oder Kunden verbunden sind.'
+                        },
+                        sanitario: {
+                            title: 'Gesundheits-Rückverfolgbarkeit',
+                            description: 'Vollständige Historie von medizinischen und pharmazeutischen Dokumenten mit sicherem und DSGVO-konformem Audit-Trail.'
+                        },
+                        automotive: {
+                            title: 'Fahrzeug-Rückverfolgbarkeit',
+                            description: 'Vollständige Historie von Wartungen, Änderungen und Zertifizierungen für jedes Fahrzeug.'
+                        },
+                        generico: {
+                            title: 'Universelle Rückverfolgbarkeit',
+                            description: 'Vollständige Historie aller Dokumente, die mit Kunden, Projekten oder Geschäftsaktivitäten verbunden sind.'
+                        }
                     }
                 },
                 modals: {
@@ -2424,8 +2678,9 @@ ocument        @keyframes fadeIn {
             }
         };
         
-        // Variabile globale per tracciare la lingua corrente
+        // Variabili globali per tracciare la lingua e il settore correnti
         let currentLanguage = 'it';
+        let currentSector = 'nautico';
 
         // Funzione per cambiare lingua
         function changeLanguage(lang) {
@@ -2434,10 +2689,34 @@ ocument        @keyframes fadeIn {
             localStorage.setItem('selectedLanguage', lang);
             document.documentElement.lang = lang;
             
+            updateContent();
+        }
+        
+        // Funzione per cambiare settore
+        function changeSector(sector) {
+            currentSector = sector;
+            localStorage.setItem('selectedSector', sector);
+            updateContent();
+        }
+        
+        // Funzione per aggiornare tutti i contenuti
+        function updateContent() {
             // Aggiorna tutti gli elementi con data-translate
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
-                const translation = getNestedTranslation(translations[lang], key);
+                let translation;
+                
+                // Controlla se è una chiave specifica per settore
+                if (key.includes('hero.') || key.includes('features.settore') || key.includes('features.ricerca') || key.includes('features.tracciabilita')) {
+                    const sectorKey = key.replace('hero.', `hero.${currentSector}.`)
+                                        .replace('features.settore', `features.settore.${currentSector}`)
+                                        .replace('features.ricerca', `features.ricerca.${currentSector}`)
+                                        .replace('features.tracciabilita', `features.tracciabilita.${currentSector}`);
+                    translation = getNestedTranslation(translations[currentLanguage], sectorKey);
+                } else {
+                    translation = getNestedTranslation(translations[currentLanguage], key);
+                }
+                
                 if (translation) {
                     element.innerHTML = translation;
                 }
@@ -2446,7 +2725,7 @@ ocument        @keyframes fadeIn {
             // Aggiorna tutti i placeholder con data-translate-placeholder
             document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
                 const key = element.getAttribute('data-translate-placeholder');
-                const translation = getNestedTranslation(translations[lang], key);
+                const translation = getNestedTranslation(translations[currentLanguage], key);
                 if (translation) {
                     element.placeholder = translation;
                 }
@@ -2458,18 +2737,26 @@ ocument        @keyframes fadeIn {
             return path.split('.').reduce((current, key) => current && current[key], obj);
         }
 
-        // Inizializza la lingua al caricamento
+        // Inizializza la lingua e il settore al caricamento
         function initializeLanguage() {
             const savedLang = localStorage.getItem('selectedLanguage') || 'it';
+            const savedSector = localStorage.getItem('selectedSector') || 'nautico';
             currentLanguage = savedLang;
+            currentSector = savedSector;
             document.getElementById('languageSelect').value = savedLang;
-            changeLanguage(savedLang);
+            document.getElementById('sectorSelect').value = savedSector;
+            updateContent();
         }
         
         // Esegui al caricamento della pagina
         document.addEventListener('DOMContentLoaded', function() {
             handlePricingVisibility();
             initializeLanguage();
+            
+            // Aggiungi event listener per il selettore di settore
+            document.getElementById('sectorSelect').addEventListener('change', function() {
+                changeSector(this.value);
+            });
         });
     </script>
 </body>
