@@ -1573,6 +1573,42 @@ ocument        @keyframes fadeIn {
                 this.style.transform = 'translateY(-10px) scale(1)';
             });
         });
+        
+        // Gestione visibilità prezzi tramite query string
+        function handlePricingVisibility() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const showPricing = urlParams.get('showPricing');
+            
+            if (showPricing !== 'true') {
+                // Nascondi i prezzi e mostra messaggio di contatto
+                const priceElements = document.querySelectorAll('.plan-price');
+                const planButtons = document.querySelectorAll('.plan-button');
+                
+                priceElements.forEach(price => {
+                    price.style.display = 'none';
+                });
+                
+                planButtons.forEach(button => {
+                    button.textContent = 'Contattaci per approfondire';
+                    button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                });
+                
+                // Cambia il titolo della sezione
+                const sectionTitle = document.querySelector('.pricing .section-title');
+                if (sectionTitle) {
+                    sectionTitle.textContent = 'I Nostri Piani';
+                }
+                
+                // Nascondi anche la sezione costi di setup
+                const setupCostsSection = document.querySelector('.setup-costs');
+                if (setupCostsSection) {
+                    setupCostsSection.style.display = 'none';
+                }
+            }
+        }
+        
+        // Esegui al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', handlePricingVisibility);
     </script>
 </body>
 </html>
