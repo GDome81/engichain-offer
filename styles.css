@@ -73,6 +73,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 70px;
 }
 
 body {
@@ -377,7 +378,7 @@ body {
 }
 
 .hamburger {
-    display: none;
+    display: none !important;
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
@@ -494,6 +495,7 @@ body {
     position: relative;
     background: var(--gradient-hero);
     overflow: hidden;
+    padding-top: 70px;
 }
 
 .hero-background {
@@ -565,7 +567,7 @@ body {
 }
 
 .hero-badge {
-    display: inline-flex;
+    display: none;
     align-items: center;
     gap: var(--spacing-sm);
     background: rgba(255, 255, 255, 0.15);
@@ -1036,6 +1038,7 @@ body {
 
 /* Testimonials Section */
 .testimonials {
+    display: none;
     padding: var(--spacing-3xl) 0;
     background: var(--bg-primary);
 }
@@ -2032,6 +2035,7 @@ input:checked + .toggle-slider:before {
     
     .hero {
         padding: var(--spacing-2xl) 0;
+        padding-top: calc(70px + var(--spacing-2xl));
     }
     
     .section-title {
@@ -2131,5 +2135,6 @@ input:checked + .toggle-slider:before {
         color: black;
         min-height: auto;
         padding: var(--spacing-lg) 0;
+        padding-top: calc(70px + var(--spacing-lg));
     }
 }
