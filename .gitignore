@@ -1,4 +1,7 @@
 /doc
 /hash_calculator.py
 /specs-web
+/engichain-client
+/engichain-fe
+/engichain-backoffice
 .env
