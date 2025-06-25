@@ -206,15 +206,15 @@ function updateDescriptionContent(sector) {
             <p class="description-text">${sectorData.description2}</p>
             <ul class="feature-list">
                 <li class="feature-item">
-                    <span >✓</span>
+                    <span class="feature-icon">✓</span>
                     ${sectorData.feature1}
                 </li>
                 <li class="feature-item">
-                    <span >✓</span>
+                    <span class="feature-icon">✓</span>
                     ${sectorData.feature2}
                 </li>
                 <li class="feature-item">
-                    <span >✓</span>
+                    <span class="feature-icon">✓</span>
                     ${sectorData.feature3}
                 </li>
             </ul>
